@@ -10,9 +10,6 @@
     ],
     "require": {
         "php": "7.0.2|7.0.4|~7.0.6|~7.1.0",
-        "magento/module-catalog": "101.1.*",
-        "magento/module-customer": "100.2.*",
-        "magento/module-sales": "100.2.*",
         "magento/framework": "100.2.*"
     },
     "minimum-stability": "dev",
