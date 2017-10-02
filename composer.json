@@ -15,6 +15,7 @@
         "magento/module-sales": "100.2.*",
         "magento/framework": "100.2.*"
     },
+    "minimum-stability": "dev",
     "type": "magento2-module",
     "autoload": {
         "psr-4": {
