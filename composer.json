@@ -1,0 +1,27 @@
+{
+    "name": "wagento/zendesk",
+    "description": "Zendesk Connector",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Wagento Creative LLC",
+            "email": "sales@wagento.com"
+        }
+    ],
+    "require": {
+        "php": "7.0.2|7.0.4|~7.0.6|~7.1.0",
+        "magento/module-catalog": "101.1.*",
+        "magento/module-customer": "100.2.*",
+        "magento/module-sales": "100.2.*",
+        "magento/framework": "100.2.*"
+    },
+    "type": "magento2-module",
+    "autoload": {
+        "psr-4": {
+            "Wagento\\Zendesk\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

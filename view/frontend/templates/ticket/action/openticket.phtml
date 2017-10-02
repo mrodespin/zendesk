@@ -1,0 +1,14 @@
+<?php
+/**
+ * Copyright Wagento Creative LLC ©, All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Wagento\Zendesk\Block\Ticket\Action\OpenTicket $block */
+?>
+
+<?php if($block->canDisplay()): ?>
+    <a href="<?= /* @escapeNotVerified */ $block->getOpenTicketUrl(); ?>" class="action view">
+        <span><?= /* @escapeNotVerified */ __('Open Ticket') ?></span>
+    </a>
+<?php endif; ?>
