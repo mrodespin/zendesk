@@ -13,7 +13,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Install extends Action
 {
-    const ZENDESK_M2_APP_ID = "136052"; // TODO: @pepe asignar el app id
+    const ZENDESK_M2_APP_ID = "136787";
     const ZENDESK_M2_APP_INSTALLATION_DATA = 'zendesk/m2_app/installation_data';
 
     /**
