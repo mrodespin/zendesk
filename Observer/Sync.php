@@ -70,7 +70,15 @@ class Sync implements ObserverInterface
     public function execute(Observer $observer)
     {
         /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
-        $customer = $observer->getData('customer_data_object');
+        $customer = $observer->getData('customer'); // login
+        if (!$customer) {
+            $customer = $observer->getData('customer_data_object'); // register
+        }
+
+        if (!($customer instanceof \Magento\Customer\Api\Data\CustomerInterface)) {
+            return;
+        }
+
         $zdUserIdAttribute = $customer->getCustomAttribute('zd_user_id');
 
         if ($zdUserIdAttribute) {

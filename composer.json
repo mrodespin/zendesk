@@ -1,11 +1,11 @@
 {
     "name": "wagento/zendesk",
     "description": "Zendesk Connector",
-    "license": "proprietary",
+    "license": "OSL-3.0",
     "authors": [
         {
             "name": "Wagento Creative LLC",
-            "email": "sales@wagento.com"
+            "email": "support@wagento.com"
         }
     ],
     "require": {
