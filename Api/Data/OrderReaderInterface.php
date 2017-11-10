@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Api\Data;
 
 /**
@@ -41,7 +40,6 @@ interface OrderReaderInterface
      * Customer note.
      */
     const CUSTOMER_NOTE = 'customer_note';
-
 
     /*
      * Order currency code.
@@ -89,12 +87,10 @@ interface OrderReaderInterface
      */
     const SHIPPING_METHOD = 'shipping_method';
 
-
     /*
      * Items.
      */
     const ITEMS = 'items';
-
 
     /**
      * Gets the increment ID for the order.
@@ -140,7 +136,6 @@ interface OrderReaderInterface
      * @return $this
      */
     public function setStatus($status);
-
 
     /**
      * Gets the store name for the order.
@@ -338,7 +333,6 @@ interface OrderReaderInterface
      * @return string | null Shipping method.
      */
     public function getShippingMethod();
-
 
     /**
      * Sets the shipping method for the order.

@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Adminhtml\Ticket;
-
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\ResponseInterface;
@@ -50,8 +48,8 @@ class Create extends Action
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Wagento\Zendesk\Helper\Data $helper,
         \Magento\Backend\Model\Auth\Session $authSession
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->ticket = $ticket;
         $this->userApi = $userApi;
@@ -59,7 +57,6 @@ class Create extends Action
         $this->helper = $helper;
         $this->authSession = $authSession;
     }
-
 
     /**
      * Execute action based on request and return result
@@ -90,26 +87,26 @@ class Create extends Action
         /** Create the Request Id */
         $requestId = $this->createRequest($requester, $requesterName, $websiteId);
         $submitterId = $this->getSubmitterId() ? $this->getSubmitterId() : "";
-        $ticket = array(
+        $ticket = [
             'requester_id' => $requestId,
             'submitter_id' => $submitterId,
             'subject' => $data['subject'],
             'status' => $data['status'],
             'priority' => $data['priority'],
-            'comment' => array(
+            'comment' => [
                 'value' => $data['description']
-            )
-        );
+            ]
+        ];
         /** Add additional options  */
         if (isset($data['type']) && strlen(trim($data['type'])) > 0) {
             $ticket['type'] = $data['type'];
         }
 
         if ($fieldId = $this->helper->getOrderField() && isset($data['order_id']) && strlen(trim($data['order_id'])) > 0) {
-            $ticket['fields'] = array(
+            $ticket['fields'] = [
                 'id' => $fieldId,
                 'value' => $data['order_id']
-            );
+            ];
         }
 
         $ticketId = $this->ticket->create($data);
@@ -200,8 +197,7 @@ class Create extends Action
 
         if (isset($user["id"])) {
             $submitterId = $user["id"];
-        } else if ($meUser = $this->userApi->getMeUser()) {
-
+        } elseif ($meUser = $this->userApi->getMeUser()) {
             if ($meUser && is_array($meUser) && isset($meUser["id"])) {
                 $submitterId = $meUser["id"];
             }

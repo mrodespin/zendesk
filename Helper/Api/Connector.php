@@ -3,13 +3,10 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 /**
  * @documentation: https://support.zendesk.com/hc/en-us/articles/203663836-Using-OAuth-authentication-with-your-application
  */
-
 namespace Wagento\Zendesk\Helper\Api;
-
 
 /**
  * This class will be used once, justo get access token
@@ -43,7 +40,6 @@ class Connector extends \Wagento\Zendesk\Helper\Api\AbstractApi
             'scope' => 'read write',
             'state' => null,
         ];
-
 
         $oAuthUrl = $this->zendeskHelper->buildUri(self::OAUTH_NEW) . '?';
         $oAuthUrl .= http_build_query(array_filter($options));
@@ -94,7 +90,6 @@ class Connector extends \Wagento\Zendesk\Helper\Api\AbstractApi
     public function validateConfig($config)
     {
         if (isset($config['client_id']) && isset($config['subdomain']) && isset($config['client_secret'])) {
-
             $scope = $config['scope'];
             $scopeId = $config['scopeId'];
 

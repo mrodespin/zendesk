@@ -3,13 +3,10 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 /**
  * @documentation: https://developer.zendesk.com/rest_api/docs/core/tickets
  */
-
 namespace Wagento\Zendesk\Helper\Api;
-
 
 class Ticket extends AbstractApi
 {
@@ -40,7 +37,9 @@ class Ticket extends AbstractApi
     /**
      * Returns a maximum of 100 tickets per page.
      *
-     * Tickets are ordered chronologically by created date, from oldest to newest. The first ticket listed may not be the absolute oldest ticket in your account due to ticket archiving. To get a list of all tickets in your account, use the Incremental Ticket Export endpoint.
+     * Tickets are ordered chronologically by created date, from oldest to newest.
+     * The first ticket listed may not be the absolute oldest ticket in your account due to ticket archiving.
+     * To get a list of all tickets in your account, use the Incremental Ticket Export endpoint.
      * For more filter options, use the Search API.
      * You can also sideload related records with the tickets. See Side-Loading.
      * @return array

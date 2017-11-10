@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block;
 
 use Magento\Framework\View\Element\Template;
@@ -50,8 +49,8 @@ class Tickets extends \Magento\Framework\View\Element\Template
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         array $data = []
-    )
-    {
+    ) {
+    
         parent::__construct($context, $data);
         $this->ticket = $ticket;
         $this->userApi = $userApi;
@@ -89,7 +88,6 @@ class Tickets extends \Magento\Framework\View\Element\Template
             $zdUserId = null;
 
             if (!$isGuest && isset($customerId)) {
-
                 $customer = $this->customerSession->getCustomerDataObject();
                 // load customer from session
                 if ($customer->getId() == $customerId) {
@@ -101,8 +99,8 @@ class Tickets extends \Magento\Framework\View\Element\Template
                     }
                 }
             }
-            // TODO: discuss posibility to list guest order ticket
 
+            // NEXT: discuss posibility to list guest order ticket
             $tickets = $this->ticket->listUserTickets($zdUserId);
 
             $orderNumber = $order->getIncrementId();
@@ -110,7 +108,9 @@ class Tickets extends \Magento\Framework\View\Element\Template
 
             foreach ($tickets as $k => $ticket) {
                 $fieldList = array_column($ticket['custom_fields'], 'value', 'id');
-                if (isset($fieldList[$zdOrderFieldId]) && $fieldList[$zdOrderFieldId] == $orderNumber) continue;
+                if (isset($fieldList[$zdOrderFieldId]) && $fieldList[$zdOrderFieldId] == $orderNumber) {
+                    continue;
+                }
                 unset($tickets[$k]);
             }
             return $tickets;

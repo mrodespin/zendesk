@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Adminhtml\Ticket;
-
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\ResponseInterface;

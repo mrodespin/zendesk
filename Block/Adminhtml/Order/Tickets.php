@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block\Adminhtml\Order;
-
 
 use Magento\Backend\Block\Template;
 
@@ -39,8 +37,8 @@ class Tickets extends Template
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Wagento\Zendesk\Helper\Api\Ticket $ticket,
         array $data = []
-    )
-    {
+    ) {
+    
         parent::__construct($context, $data);
         $this->orderRepository = $orderRepository;
         $this->customerRepository = $customerRepository;
@@ -72,8 +70,8 @@ class Tickets extends Template
                     $zdUserId = $zdUserIdAttr->getValue();
                 }
             }
-            // TODO: discuss posibility to list guest order ticket
 
+            //NEXT discuss posibility to list guest order ticket
             $tickets = $this->ticket->listUserTickets($zdUserId);
 
             $orderNumber = $order->getIncrementId();
@@ -81,7 +79,9 @@ class Tickets extends Template
 
             foreach ($tickets as $k => $ticket) {
                 $fieldList = array_column($ticket['custom_fields'], 'value', 'id');
-                if (isset($fieldList[$zdOrderFieldId]) && $fieldList[$zdOrderFieldId] == $orderNumber) continue;
+                if (isset($fieldList[$zdOrderFieldId]) && $fieldList[$zdOrderFieldId] == $orderNumber) {
+                    continue;
+                }
                 unset($tickets[$k]);
             }
             return $tickets;

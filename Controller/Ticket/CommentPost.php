@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Ticket;
-
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
@@ -32,13 +30,12 @@ class CommentPost extends \Wagento\Zendesk\Controller\AbstractUserAuthentication
         Context $context,
         \Magento\Customer\Model\Session $customerSession,
         \Wagento\Zendesk\Helper\Api\Ticket $ticket
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->customerSession = $customerSession;
         $this->ticket = $ticket;
     }
-
 
     /**
      * Execute action based on request and return result
@@ -57,7 +54,6 @@ class CommentPost extends \Wagento\Zendesk\Controller\AbstractUserAuthentication
         $zdUserIdAttr = $customer->getCustomAttribute('zd_user_id');
 
         if ($zdUserIdAttr) {
-
             $commentData = [
                 "author_id" => $zdUserIdAttr->getValue(),
                 "body" => $this->getRequest()->getParam('comment'),

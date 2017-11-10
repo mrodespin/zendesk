@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Helper\Api;
-
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
@@ -36,8 +34,8 @@ abstract class AbstractApi extends AbstractHelper
         Context $context,
         \Wagento\Zendesk\Helper\Api\Sources\Client $client,
         \Wagento\Zendesk\Helper\Data $zendeskHelper
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->zendeskHelper = $zendeskHelper;
         $this->client = $client;
@@ -51,7 +49,7 @@ abstract class AbstractApi extends AbstractHelper
     {
         $this->prepareAuth();
         if (count($params) > 0) {
-            $args = array();
+            $args = [];
             foreach ($params as $arg => $val) {
                 $args[] = urlencode($arg) . '=' . urlencode($val);
             }

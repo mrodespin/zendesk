@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Adminhtml\Customer\Ajax;
 
 use Magento\Backend\App\Action;
@@ -45,8 +44,8 @@ class Sync extends Action
         \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
         \Magento\Framework\Api\FilterBuilder $filterBuilder,
         Context $context
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->event = $eventManager;
         $this->customerRepository = $customerRepository;
@@ -80,7 +79,6 @@ class Sync extends Action
                 $this->event->dispatch('customer_save_after_data_object', ['customer' => $customer]);
             }
             $res['success'] = 'Success';
-
         } catch (\Exception $exception) {
             $res['error'] = 'Try Again';
         }

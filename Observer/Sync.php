@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Observer;
 
 use Magento\Framework\Event\Observer;
@@ -53,8 +52,8 @@ class Sync implements ObserverInterface
         \Magento\Sales\Model\OrderFactory $orderFactory,
         \Magento\Customer\Model\Logger $customerLogger,
         \Magento\Customer\Model\GroupFactory $groupFactory
-    )
-    {
+    ) {
+    
         $this->user = $user;
         $this->customerFactory = $customerFactory;
         $this->scopeConfig = $scopeConfig;
@@ -89,7 +88,6 @@ class Sync implements ObserverInterface
             $updateCustomer = !isset($data['id']) || $data['id'] != $zdUserId;
             $zdUserId = $updateCustomer && isset($data['id']) ? $data['id'] : $zdUserId;
         } else {
-
             $email = $customer->getEmail();
 
             // look for already created user
@@ -163,7 +161,8 @@ class Sync implements ObserverInterface
         $orderTable = $orderResource->getMainTable();
 
         $select = $orderConnection->select()->from(
-            $orderTable, ['lifetime_sales' => 'SUM(subtotal_invoiced)']
+            $orderTable,
+            ['lifetime_sales' => 'SUM(subtotal_invoiced)']
         )->where('customer_email LIKE ?', $email);
 
         $select_res = $orderConnection->fetchOne($select);
@@ -184,7 +183,8 @@ class Sync implements ObserverInterface
         $orderTable = $orderResource->getMainTable();
 
         $select = $orderConnection->select()->from(
-            $orderTable, ['average_sale' => 'AVG( IFNULL( subtotal_invoiced, 0 ) )']
+            $orderTable,
+            ['average_sale' => 'AVG( IFNULL( subtotal_invoiced, 0 ) )']
         )->where('customer_email LIKE ?', $email);
 
         $select_res = $orderConnection->fetchOne($select);

@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Adminhtml\Connector\Ajax;
-
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\ResponseInterface;
@@ -26,12 +24,11 @@ class Validation extends Action
     public function __construct(
         Action\Context $context,
         \Wagento\Zendesk\Helper\Api\Connector $connector
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->connector = $connector;
     }
-
 
     /**
      * Execute action based on request and return result

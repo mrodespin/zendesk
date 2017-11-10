@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Ticket;
-
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
@@ -31,13 +29,12 @@ class View extends \Wagento\Zendesk\Controller\AbstractUserAuthentication
         Context $context,
         \Magento\Customer\Model\Session $customerSession,
         \Wagento\Zendesk\Helper\Api\Ticket $ticket
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->customerSession = $customerSession;
         $this->ticket = $ticket;
     }
-
 
     /**
      * Execute action based on request and return result
@@ -57,7 +54,7 @@ class View extends \Wagento\Zendesk\Controller\AbstractUserAuthentication
             $ticketId = $this->getRequest()->getParam('id');
             $ticket = $this->ticket->showTicket($ticketId);
 
-            // TODO: In  next release verify fields submitter_id and requester_id this maybe different in some cases
+            // NEXT: In  next release verify fields submitter_id and requester_id this maybe different in some cases
             if ($ticket && $zdUserId == $ticket['submitter_id'] && $zdUserId == $ticket['requester_id']) {
                 /** @var \Magento\Framework\View\Result\Page $resultPage */
                 $resultPage = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_PAGE);

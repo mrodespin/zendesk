@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Observer;
-
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Event\Observer;
@@ -28,7 +26,6 @@ class AdminZendesk implements ObserverInterface
     // CUSTOMER FIELD
     const PATH_ZENDESK_CUSTOMER_FIELDS_ENABLE = 'zendesk/customer/enable_attribute_sync';
     const PATH_ZENDESK_CUSTOMER_ATTRIBUTES_TO_SYNC = 'zendesk/customer/attributes_to_sync';
-
 
     /**
      * @var ScopeConfigInterface
@@ -77,8 +74,8 @@ class AdminZendesk implements ObserverInterface
         \Wagento\Zendesk\Helper\Api\TicketField $ticketField,
         \Wagento\Zendesk\Helper\Api\UserField $userField,
         \Magento\Framework\Message\ManagerInterface $messageManager
-    )
-    {
+    ) {
+    
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
         $this->writer = $writer;
@@ -158,7 +155,6 @@ class AdminZendesk implements ObserverInterface
         $enableOrderField = $this->scopeConfig->getValue(self::PATH_ZENDESK_ORDER_FIELD_ENABLE, $scope, $storeCode);
 
         if ($enableOrderField) {
-
             // MSaved ticket order fieldID
             $orderFieldId = $this->scopeConfig->getValue(self::PATH_ZENDESK_ORDER_FIELD_ID, $scope, $storeCode);
 
@@ -194,7 +190,7 @@ class AdminZendesk implements ObserverInterface
                 if ($zdTicketOrderFieldId) {
                     $message = __('Customer field Created Successfully');
                 }
-            } else if (count($filterId) == 1) {
+            } elseif (count($filterId) == 1) {
                 // Verify that only exists one field.
                 $zdTicketOrderFieldId = $filterId['0'];
                 $message = __('Order field updated successfully.');
@@ -224,7 +220,6 @@ class AdminZendesk implements ObserverInterface
     private function configureEndUserCustomField($scope, $storeCode, $scopeId)
     {
         if ($this->scopeConfig->getValue(self::PATH_ZENDESK_CUSTOMER_FIELDS_ENABLE, $scope, $storeCode)) {
-
             // REQUESTED ATTRIBUTES TO CREATED
             $configuredFields = $this->scopeConfig->getValue(self::PATH_ZENDESK_CUSTOMER_ATTRIBUTES_TO_SYNC, $scope, $storeCode);
             $configuredFieldsList = array_flip(explode(',', $configuredFields));
@@ -257,7 +252,7 @@ class AdminZendesk implements ObserverInterface
      */
     private function getCustomerAttributes($attributesToBeCreated)
     {
-        // TODO: For future release a customer attribute processor will be required for all customer eav attributes
+        // NEXT: For future release a customer attribute processor will be required for all customer eav attributes
 
         $customerAttributes = [
             'id' => [

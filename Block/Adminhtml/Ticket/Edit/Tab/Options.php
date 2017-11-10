@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block\Adminhtml\Ticket\Edit\Tab;
 
 /**
@@ -13,7 +12,6 @@ namespace Wagento\Zendesk\Block\Adminhtml\Ticket\Edit\Tab;
 class OPtions extends \Magento\Backend\Block\Widget\Form\Generic implements
     \Magento\Ui\Component\Layout\Tabs\TabInterface
 {
-
 
     /**
      * {@inheritdoc}
@@ -71,7 +69,6 @@ class OPtions extends \Magento\Backend\Block\Widget\Form\Generic implements
     {
         return false;
     }
-
 
     protected function _prepareForm()
     {

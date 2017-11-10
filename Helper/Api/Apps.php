@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Helper\Api;
-
 
 class Apps extends AbstractApi
 {
@@ -24,7 +22,6 @@ class Apps extends AbstractApi
 
     // Delete App: DELETE /api/v2/apps/{id}.json
     const DELETE_APP = '/api/v2/apps/%s.json';
-
 
     /**
      * @param $id

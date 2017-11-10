@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Plugin;
 
 use Magento\Framework\App\RequestInterface;
@@ -27,8 +26,8 @@ class Authentication
     public function __construct(
         \Magento\Customer\Model\Url $customerUrl,
         \Magento\Customer\Model\Session $customerSession
-    )
-    {
+    ) {
+    
         $this->customerUrl = $customerUrl;
         $this->customerSession = $customerSession;
     }

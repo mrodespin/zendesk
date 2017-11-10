@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Ticket;
-
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
@@ -39,14 +37,13 @@ class CreatePost extends AbstractUserAuthentication
         \Wagento\Zendesk\Helper\Api\Ticket $ticket,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->ticket = $ticket;
         $this->customerSession = $customerSession;
         $this->scopeConfig = $scopeConfig;
     }
-
 
     /**
      * Execute action based on request and return result
@@ -66,10 +63,8 @@ class CreatePost extends AbstractUserAuthentication
 
         $backParams = [];
         if ($customerAttribute) {
-
             $endUserId = $customerAttribute->getValue();
             $data = $this->getRequest()->getParams();
-
 
             $params = [
                 'requester_id' => $endUserId,
@@ -82,17 +77,21 @@ class CreatePost extends AbstractUserAuthentication
 
             // Add extra attributes validation
             $status = $this->scopeConfig->getValue('zendesk/ticket/priority');
-            if ($status) $params['status'] = $status;
+            if ($status) {
+                $params['status'] = $status;
+            }
             $type = $this->scopeConfig->getValue('zendesk/ticket/status');
-            if ($type) $params['type'] = $type;
+            if ($type) {
+                $params['type'] = $type;
+            }
             $priority = $this->scopeConfig->getValue('zendesk/ticket/type');
-            if ($priority) $params['priority'] = $priority;
-
+            if ($priority) {
+                $params['priority'] = $priority;
+            }
 
             // Verify order number send
             $sendOrderNumber = $this->scopeConfig->getValue('zendesk/ticket/add_order_number');
             if ($sendOrderNumber && isset($data['order']) && $data['order'] != -1) {
-
                 $ticketFieldId = $this->scopeConfig->getValue('zendesk/ticket/order_field_id');
                 $params['custom_fields'] = [
                     [

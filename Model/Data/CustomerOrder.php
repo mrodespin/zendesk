@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Model\Data;
-
 
 use Wagento\Zendesk\Api\Data\CustomerOrderInterface;
 
@@ -40,7 +38,6 @@ class CustomerOrder extends \Magento\Framework\Api\AbstractExtensibleObject impl
      */
     private $scopeConfig;
 
-
     /**
      * CustomerOrder constructor.
      * @param \Magento\Framework\Api\ExtensionAttributesFactory $extensionFactory
@@ -63,8 +60,8 @@ class CustomerOrder extends \Magento\Framework\Api\AbstractExtensibleObject impl
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         array $data = []
-    )
-    {
+    ) {
+    
         parent::__construct($extensionFactory, $attributeValueFactory, $data);
         $this->orderFactory = $orderFactory;
         $this->addressRenderer = $addressRenderer;
@@ -309,7 +306,6 @@ class CustomerOrder extends \Magento\Framework\Api\AbstractExtensibleObject impl
             'items' => []
         ];
 
-
         foreach ($order->getItems() as $item) {
             // original float values
             $originalPrice = $item->getOriginalPrice();
@@ -363,8 +359,8 @@ class CustomerOrder extends \Magento\Framework\Api\AbstractExtensibleObject impl
         $format = \IntlDateFormatter::SHORT,
         $showTime = false,
         $timezone = null
-    )
-    {
+    ) {
+    
         $date = $date instanceof \DateTimeInterface ? $date : new \DateTime($date);
         return $this->localeDate->formatDateTime(
             $date,
@@ -387,8 +383,8 @@ class CustomerOrder extends \Magento\Framework\Api\AbstractExtensibleObject impl
         $time = null,
         $format = \IntlDateFormatter::SHORT,
         $showDate = false
-    )
-    {
+    ) {
+    
         $time = $time instanceof \DateTimeInterface ? $time : new \DateTime($time);
         return $this->localeDate->formatDateTime(
             $time,

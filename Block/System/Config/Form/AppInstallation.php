@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block\System\Config\Form;
-
 
 class AppInstallation extends \Magento\Config\Block\System\Config\Form\Field
 {
@@ -14,7 +12,6 @@ class AppInstallation extends \Magento\Config\Block\System\Config\Form\Field
      * @var string
      */
     protected $_template = 'Wagento_Zendesk::system/config/button/installapp.phtml';
-
 
     /**
      * Remove scope label

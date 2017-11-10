@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Index;
-
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Config\Storage\WriterInterface;
@@ -13,10 +11,8 @@ use Magento\Framework\App\ResponseInterface;
 use Wagento\Zendesk\Controller\AbstractOauth;
 use Wagento\Zendesk\Helper\Api\Connector;
 
-
 class Index extends AbstractOauth
 {
-
 
     /**
      * @var WriterInterface
@@ -37,12 +33,11 @@ class Index extends AbstractOauth
     public function __construct(
         Context $context,
         Connector $connector
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->connector = $connector;
     }
-
 
     /**
      * Execute action based on request and return result

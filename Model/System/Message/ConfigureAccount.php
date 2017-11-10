@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Model\System\Message;
-
 
 class ConfigureAccount implements \Magento\Framework\Notification\MessageInterface
 {
@@ -27,12 +25,11 @@ class ConfigureAccount implements \Magento\Framework\Notification\MessageInterfa
     public function __construct(
         \Magento\Framework\UrlInterface $urlBuilder,
         \Wagento\Zendesk\Helper\Api\Connector $connector
-    )
-    {
+    ) {
+    
         $this->urlBuilder = $urlBuilder;
         $this->connector = $connector;
     }
-
 
     /**
      * Retrieve unique message identity

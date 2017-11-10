@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Adminhtml\Widget\Customer;
-
 
 class Chooser extends \Magento\Backend\App\Action
 {

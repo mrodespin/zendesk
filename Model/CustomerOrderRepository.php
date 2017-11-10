@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Model;
-
 
 use Magento\Customer\Api\GroupRepositoryInterface;
 use Magento\Customer\Model\CustomerFactory;
@@ -57,15 +55,14 @@ class CustomerOrderRepository implements CustomerOrderRepositoryInterface
         OrderFactory $orderFactory,
         GroupRepositoryInterface $groupRepository,
         DataObjectHelper $dataObjectHelper
-    )
-    {
+    ) {
+    
         $this->customerFactory = $customerFactory;
         $this->customerOrder = $customerOrder;
         $this->orderFactory = $orderFactory;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->groupRepository = $groupRepository;
     }
-
 
     /**
      * Loads a specified customer order information.
@@ -115,7 +112,8 @@ class CustomerOrderRepository implements CustomerOrderRepositoryInterface
                 'group_id'
             ]
         )->where(
-            'email LIKE ?', $email
+            'email LIKE ?',
+            $email
         );
         $customerData = $customerConnection->fetchRow($select);
 
@@ -136,7 +134,8 @@ class CustomerOrderRepository implements CustomerOrderRepositoryInterface
                     'group_id' => 'customer_group_id'
                 ]
             )->where(
-                'customer_email = ?', $email
+                'customer_email = ?',
+                $email
             )->order(['id DESC'])
                 ->limit(1);
             $customerData = $orderConnection->fetchRow($select);
@@ -153,7 +152,8 @@ class CustomerOrderRepository implements CustomerOrderRepositoryInterface
 
         // lifetime sales
         $select = $orderConnection->select()->from(
-            $orderTable, ['lifetime_sales' => 'SUM(subtotal_invoiced)']
+            $orderTable,
+            ['lifetime_sales' => 'SUM(subtotal_invoiced)']
         )->where('customer_email LIKE ?', $email);
 
         $select_res = $orderConnection->fetchOne($select);
@@ -171,4 +171,3 @@ class CustomerOrderRepository implements CustomerOrderRepositoryInterface
         return $customerData;
     }
 }
-

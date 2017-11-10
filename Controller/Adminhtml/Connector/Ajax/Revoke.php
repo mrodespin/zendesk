@@ -1,13 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: w10
- * Date: 9/28/17
- * Time: 10:58 AM
+ * Copyright Wagento Creative LLC ©, All rights reserved.
+ * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Adminhtml\Connector\Ajax;
-
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\ResponseInterface;
@@ -28,8 +24,8 @@ class Revoke extends Action
     public function __construct(
         Action\Context $context,
         \Wagento\Zendesk\Helper\Data $zendeskHelper
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->zendeskHelper = $zendeskHelper;
     }

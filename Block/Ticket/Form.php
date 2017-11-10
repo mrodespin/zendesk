@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block\Ticket;
-
 
 use Magento\Framework\View\Element\Template;
 
@@ -60,8 +58,8 @@ class Form extends Template
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Sales\Model\Order\Config $orderConfig,
         array $data = []
-    )
-    {
+    ) {
+    
         parent::__construct($context, $data);
         $this->status = $status;
         $this->priority = $priority;

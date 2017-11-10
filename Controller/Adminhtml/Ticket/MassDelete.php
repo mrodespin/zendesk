@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Adminhtml\Ticket;
 
 class MassDelete extends \Magento\Backend\App\Action
@@ -12,26 +11,25 @@ class MassDelete extends \Magento\Backend\App\Action
 
     /**
      * Helper Ticket
-     * 
+     *
      * @var \Wagento\Zendesk\Helper\Api\Ticket
      */
     protected $_ticket;
 
     /**
      * constructor
-     * 
+     *
      * @param \Wagento\Zendesk\Helper\Api\Ticket $ticket
      * @param \Magento\Backend\App\Action\Context $context
      */
     public function __construct(
         \Wagento\Zendesk\Helper\Api\Ticket $ticket,
         \Magento\Backend\App\Action\Context $context
-    )
-    {
+    ) {
+    
         $this->_ticket = $ticket;
         parent::__construct($context);
     }
-
 
     /**
      * execute action
@@ -40,10 +38,10 @@ class MassDelete extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        if($selected_ticket_ids = $this->getRequest()->getParam('selected')){
+        if ($selected_ticket_ids = $this->getRequest()->getParam('selected')) {
             $array_chunk_ids = array_chunk($selected_ticket_ids, 99);
             foreach ($array_chunk_ids as $array_ids) {
-                $ticket_ids = implode(",",$array_ids);
+                $ticket_ids = implode(",", $array_ids);
                 $this->_ticket->bulkDeleteTickets($ticket_ids);
             }
             $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', count($selected_ticket_ids)));

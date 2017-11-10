@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Copyright Wagento Creative LLC ©, All rights reserved.
+ * See COPYING.txt for license details.
+ */
 namespace Wagento\Zendesk\Block\Adminhtml\Customer\Tab;
 
 use Magento\Customer\Controller\RegistryConstants;
@@ -23,8 +26,8 @@ class Tickets extends \Magento\Backend\Block\Template implements TabInterface
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         array $data = []
-    )
-    {
+    ) {
+    
         $this->_coreRegistry = $registry;
         parent::__construct($context, $data);
     }

@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Model\Config\Source\Ticket;
-
 
 class Type implements \Magento\Framework\Data\OptionSourceInterface
 {
@@ -33,5 +31,4 @@ class Type implements \Magento\Framework\Data\OptionSourceInterface
 
         return $this->options;
     }
-
 }

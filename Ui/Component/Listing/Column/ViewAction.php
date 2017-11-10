@@ -1,13 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: w10
- * Date: 9/20/17
- * Time: 5:46 PM
+ * Copyright Wagento Creative LLC ©, All rights reserved.
+ * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Ui\Component\Listing\Column;
-
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
@@ -34,8 +30,8 @@ class ViewAction extends Column
         \Wagento\Zendesk\Helper\Data $zendeskHelper,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
+    
         parent::__construct($context, $uiComponentFactory, $components, $data);
         $this->zendeskHelper = $zendeskHelper;
     }

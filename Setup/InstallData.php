@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Setup;
-
 
 use Magento\Customer\Api\CustomerMetadataInterface;
 use Magento\Eav\Setup\EavSetup;
@@ -34,8 +32,8 @@ class InstallData implements InstallDataInterface
     public function __construct(
         EavSetup $eavSetup,
         \Magento\Eav\Model\Config $eavConfig
-    )
-    {
+    ) {
+    
         $this->eavSetup = $eavSetup;
         $this->eavConfig = $eavConfig;
     }

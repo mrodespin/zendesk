@@ -3,16 +3,20 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Helper\Api\Sources;
 
+/**
+ * Class Client
+ * @package Wagento\Zendesk\Helper\Api\Sources
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ */
 class Client extends \Magento\Framework\HTTP\Client\Curl
 {
     /**
      * @var null
      */
     private $sslVersion = null;
-
 
     /**
      * Custom method for put and delete.
@@ -27,7 +31,6 @@ class Client extends \Magento\Framework\HTTP\Client\Curl
         try {
             $this->makeRequest($method, $uri, $params);
         } catch (\Exception $exception) {
-
         }
     }
 

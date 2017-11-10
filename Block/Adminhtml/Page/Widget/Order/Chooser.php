@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block\Adminhtml\Page\Widget\Order;
 
 /**
@@ -44,8 +43,8 @@ class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $collectionFactory,
         \Magento\Framework\View\Model\PageLayout\Config\BuilderInterface $pageLayoutBuilder,
         array $data = []
-    )
-    {
+    ) {
+    
         $this->pageLayoutBuilder = $pageLayoutBuilder;
         $this->_pageFactory = $pageFactory;
         $this->_collectionFactory = $collectionFactory;
@@ -134,7 +133,7 @@ class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareCollection()
     {
-        /* @var $collection \Magento\Sales\Model\ResourceModel\Order\CollectionFactory */
+        /* @var \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $collection */
         $collection = $this->_collectionFactory->create();
         $this->setCollection($collection);
 
@@ -175,7 +174,6 @@ class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
                 'column_css_class' => 'col-customer_email'
             ]
         );
-
 
         return parent::_prepareColumns();
     }

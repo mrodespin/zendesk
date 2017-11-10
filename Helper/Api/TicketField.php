@@ -3,13 +3,10 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 /**
  * @documentation: https://developer.zendesk.com/rest_api/docs/core/ticket_fields
  */
-
 namespace Wagento\Zendesk\Helper\Api;
-
 
 class TicketField extends AbstractApi
 {
@@ -26,7 +23,8 @@ class TicketField extends AbstractApi
     /**
      * Returns a list of all ticket fields in your account.
      * Fields are returned in the order that you specify in your Ticket Fields configuration in Zendesk Support.
-     * Clients should cache this resource for the duration of their API usage and map the id for each ticket field to the values returned under the fields attributes on the Ticket resource.
+     * Clients should cache this resource for the duration of their API usage and map the id for each ticket
+     * field to the values returned under the fields attributes on the Ticket resource.
      *
      * @return array
      */
@@ -38,7 +36,8 @@ class TicketField extends AbstractApi
     }
 
     /**
-     * Creates any of the following custom field types: text, textarea, checkbox, date, integer, decimal, regexp, tagger (custom dropdown).
+     * Creates any of the following custom field types:
+     * text, textarea, checkbox, date, integer, decimal, regexp, tagger (custom dropdown).
      *
      * @param $data
      * @return null

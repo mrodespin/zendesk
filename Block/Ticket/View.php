@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block\Ticket;
-
 
 use Magento\Framework\View\Element\Template;
 
@@ -44,15 +42,14 @@ class View extends Template
         \Magento\Customer\Model\Session $customerSession,
         \Wagento\Zendesk\Helper\Api\Ticket $ticket,
         array $data = []
-    )
-    {
+    ) {
+    
         parent::__construct($context, $data);
         $this->comment = $comment;
         $this->user = $user;
         $this->customerSession = $customerSession;
         $this->ticket = $ticket;
     }
-
 
     /**
      * Get Ticket Comments.

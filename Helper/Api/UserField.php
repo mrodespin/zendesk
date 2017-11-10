@@ -3,13 +3,10 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 /**
  * @documentation: https://developer.zendesk.com/rest_api/docs/core/user_fields
  */
-
 namespace Wagento\Zendesk\Helper\Api;
-
 
 class UserField extends AbstractApi
 {

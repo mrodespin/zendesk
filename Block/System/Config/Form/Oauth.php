@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block\System\Config\Form;
 
 class Oauth extends \Magento\Config\Block\System\Config\Form\Field
@@ -28,8 +27,8 @@ class Oauth extends \Magento\Config\Block\System\Config\Form\Field
         \Magento\Backend\Block\Template\Context $context,
         \Wagento\Zendesk\Helper\Data $zendeskHelper,
         array $data = []
-    )
-    {
+    ) {
+    
         parent::__construct($context, $data);
         $this->zendeskHelper = $zendeskHelper;
     }

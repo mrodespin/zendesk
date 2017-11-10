@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Ui\Component;
-
 
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\ReportingInterface;
@@ -63,8 +61,8 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
         \Magento\Framework\UrlInterface $urlBuilder,
         array $meta = [],
         array $data = []
-    )
-    {
+    ) {
+    
         parent::__construct(
             $name,
             $primaryFieldName,
@@ -119,7 +117,6 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
             $result[] = $ticket;
         }
 
-
         $data['items'] = $result;
 
         return $data;
@@ -133,7 +130,7 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
      */
     private function getSorting($tickets, $sorting, $emails)
     {
-        $array_sorting = array();
+        $array_sorting = [];
         $key = 0;
         foreach ($tickets as $ticket) {
             $ticket['email'] = (isset($emails[$ticket['requester_id']]) ? $emails[$ticket['requester_id']] : '');

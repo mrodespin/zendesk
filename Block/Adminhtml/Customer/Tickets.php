@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block\Adminhtml\Customer;
-
 
 use Magento\Backend\Block\Template;
 
@@ -32,13 +30,12 @@ class Tickets extends Template
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Wagento\Zendesk\Helper\Api\Ticket $ticket,
         array $data = []
-    )
-    {
+    ) {
+    
         parent::__construct($context, $data);
         $this->customerRepository = $customerRepository;
         $this->ticket = $ticket;
     }
-
 
     /**
      * Return ticket list.

@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Controller\Adminhtml\App\Ajax;
-
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\ResponseInterface;
@@ -53,8 +51,8 @@ class Install extends Action
         \Magento\Integration\Api\OauthServiceInterface $oauthService,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->apps = $apps;
         $this->integrationService = $integrationService;
@@ -62,7 +60,6 @@ class Install extends Action
         $this->configWriter = $configWriter;
         $this->scopeConfig = $scopeConfig;
     }
-
 
     /**
      * Execute action based on request and return result
@@ -83,7 +80,7 @@ class Install extends Action
         $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
 
         $config = $this->scopeConfig->getValue(self::ZENDESK_M2_APP_INSTALLATION_DATA);
-        $data = json_decode($config, true);;
+        $data = json_decode($config, true);
 
         if ((isset($data['integration_id']) && is_numeric($data['integration_id']))
             && isset($data['installation_id']) && is_numeric($data['installation_id'])) {
@@ -128,10 +125,9 @@ class Install extends Action
             /** @var \Magento\Integration\Model\Oauth\Token $accessToken */
             $accessToken = $this->oauthService->getAccessToken($integrationId);
             if ($accessToken) {
-
                 $appParams = [
-                    'name' => 'Magento2 App',
-                    'domain' => $this->getUrl('/'),
+                    'name' => 'Magento 2 Connector by Wagento',
+                    'domain' => $this->_url->getBaseUrl(),
                     'token' => $accessToken->getToken(),
                 ];
 

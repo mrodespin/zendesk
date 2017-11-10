@@ -3,9 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Helper;
-
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -52,8 +50,8 @@ class Data extends AbstractHelper
         Context $context,
         \Magento\Framework\Encryption\EncryptorInterface $encryptor,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
-    )
-    {
+    ) {
+    
         parent::__construct($context);
         $this->encryptor = $encryptor;
         $this->configWriter = $configWriter;

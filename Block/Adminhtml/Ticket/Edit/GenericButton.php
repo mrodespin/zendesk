@@ -3,7 +3,6 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Wagento\Zendesk\Block\Adminhtml\Ticket\Edit;
 
 use Magento\Backend\Block\Widget\Context;
@@ -15,14 +14,13 @@ class GenericButton
      */
     protected $context;
 
-
     /**
      * @param Context $context
      */
     public function __construct(
         Context $context
-    )
-    {
+    ) {
+    
         $this->context = $context;
     }
 
