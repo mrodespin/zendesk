@@ -223,7 +223,7 @@
 
             <!-- M2 APP IN ZENDESK CONFIG -->
             <group id="zendesk_m2app" showInDefault="1" showInWebsite="1" translate="label comment">
-                <label>Magento 2 APP in Zendesk</label>
+                <label>Magento 2 Connector by Wagento in Zendesk</label>
 
                 <field id="install_app_btn" type="button" sortOrder="10" translate="label comment"
                        showInDefault="1" showInWebsite="1" showInStore="1">
