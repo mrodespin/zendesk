@@ -9,7 +9,7 @@ namespace Wagento\Zendesk\Block\Adminhtml\Ticket\Edit\Tab;
  * @api
  * @SuppressWarnings(PHPMD.DepthOfInheritance)
  */
-class OPtions extends \Magento\Backend\Block\Widget\Form\Generic implements
+class Options extends \Magento\Backend\Block\Widget\Form\Generic implements
     \Magento\Ui\Component\Layout\Tabs\TabInterface
 {
 

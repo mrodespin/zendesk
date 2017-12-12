@@ -6,7 +6,7 @@
 namespace Wagento\Zendesk\Ui\Component;
 
 use Magento\Framework\Api\FilterBuilder;
-use Magento\Framework\Api\Search\ReportingInterface;
+use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
 use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 use Magento\Framework\App\RequestInterface;
 
@@ -37,7 +37,7 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
-     * @param ReportingInterface $reporting
+     * @param Reporting $reporting
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param RequestInterface $request
      * @param FilterBuilder $filterBuilder
@@ -51,7 +51,7 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
         $name,
         $primaryFieldName,
         $requestFieldName,
-        ReportingInterface $reporting,
+        Reporting $reporting,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         RequestInterface $request,
         FilterBuilder $filterBuilder,

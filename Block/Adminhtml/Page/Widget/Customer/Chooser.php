@@ -116,12 +116,22 @@ class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
                 var inputRequester = jQuery("input[name=\"requester\"]");
                 var inputRequesterName = jQuery("input[name=\"requester_name\"]");
                 
-                if(inputRequester.length > 0 && inputRequesterName.length > 0) {
+                var changeInputs = function(){
                     inputRequester.val(pageId); 
                     inputRequester.trigger("change");
                     var customerName = pageTitle.replace(/^\s+|\s+$/g,"");
                     inputRequesterName.val(customerName); 
                     inputRequesterName.trigger("change");
+                };
+                if(inputRequester.length > 0 && inputRequesterName.length > 0) {
+                    changeInputs();
+                }else{
+                   /** Fix the  issue with the version 2.0.2 */
+                   inputRequester = jQuery("input[name=\"general[requester]\"]");
+                   inputRequesterName = jQuery("input[name=\"general[requester_name]\"]");
+                   if(inputRequester.length > 0 && inputRequesterName.length > 0) {
+                        changeInputs(inputRequester, inputRequesterName);
+                   }
                 }
                 ' .
             $chooserJsObject .

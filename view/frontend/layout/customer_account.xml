@@ -9,7 +9,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="customer_account_navigation">
-            <block class="Magento\Customer\Block\Account\SortLinkInterface"
+            <block class="Magento\Framework\View\Element\Html\Link\Current"
                    ifconfig="zendesk/ticket/frontend/customer_account"
                    name="customer-account-navigation-customer-tickets-link">
                 <arguments>
