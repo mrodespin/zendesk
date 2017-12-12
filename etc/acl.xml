@@ -18,7 +18,6 @@
                         <resource id="Magento_Config::config">
                             <resource id="Wagento_Zendesk::config_zendesk"
                                       title="Zendesk Section"
-                                      translate="title"
                                       sortOrder="0"/>
                         </resource>
                     </resource>
@@ -26,19 +25,15 @@
 
                 <resource id="Wagento_Zendesk::zendesk"
                           title="Zendesk"
-                          translate="title"
                           sortOrder="50">
                     <resource id="Wagento_Zendesk::zendesk_config"
                               title="Configuration"
-                              translate="title"
                               sortOrder="0"/>
                     <resource id="Wagento_Zendesk::zendesk_ticket"
                               title="Tickets"
-                              translate="title"
                               sortOrder="10"/>
                     <resource id="Wagento_Zendesk::zendesk_api"
                               title="REST API"
-                              translate="title"
                               sortOrder="20"/>
                 </resource>
             </resource>

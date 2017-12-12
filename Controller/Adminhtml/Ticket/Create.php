@@ -78,6 +78,12 @@ class Create extends Action
 
         $data = $this->getRequest()->getParams();
 
+        /** Fix Magento 2.0 */
+        if(isset($data["general"])){
+            $data = array_merge($data, $data["general"]);
+            unset($data["general"]);
+        }
+
         $requester = trim($data["requester"]);
         if (!empty($data["customer_email"])) {
             $requester = $data["customer_email"];

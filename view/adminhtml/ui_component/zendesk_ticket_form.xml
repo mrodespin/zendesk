@@ -12,169 +12,165 @@
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">zendesk_ticket_form.zendesk_ticket_form_data_source</item>
-            <item name="namespace" xsi:type="string">zendesk_ticket_form</item>
+            <item name="deps" xsi:type="string">zendesk_ticket_form.zendesk_ticket_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">Ticket Information</item>
-        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="save" xsi:type="string">Wagento\Zendesk\Block\Adminhtml\Ticket\Edit\CreateButton</item>
+            <item name="back" xsi:type="string">Wagento\Zendesk\Block\Adminhtml\Ticket\Edit\BackButton</item>
+        </item>
     </argument>
 
-    <settings>
-        <buttons>
-            <button name="save" class="Wagento\Zendesk\Block\Adminhtml\Ticket\Edit\CreateButton"/>
-            <button name="back" class="Wagento\Zendesk\Block\Adminhtml\Ticket\Edit\BackButton"/>
-        </buttons>
-        <namespace>zendesk_ticket_form</namespace>
-        <dataScope>data</dataScope>
-        <deps>
-            <dep>zendesk_ticket_form.zendesk_ticket_form_data_source</dep>
-        </deps>
-    </settings>
 
     <dataSource name="zendesk_ticket_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Wagento\Zendesk\Model\Ticket\DataProvider</argument>
+            <argument name="name" xsi:type="string">zendesk_ticket_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="zendesk/ticket/create"/>
+                    <item name="validate_url" xsi:type="url" path="zendesk/ticket/create"/>
+                </item>
+            </argument>
+        </argument>
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
             </item>
         </argument>
-
-        <settings>
-            <submitUrl path="zendesk/ticket/create"/>
-        </settings>
-
-        <dataProvider class="Wagento\Zendesk\Model\Ticket\DataProvider" name="zendesk_ticket_form_data_source">
-            <settings>
-                <requestFieldName>id</requestFieldName>
-                <primaryFieldName>id</primaryFieldName>
-            </settings>
-        </dataProvider>
     </dataSource>
 
     <fieldset name="general">
-        <settings>
-            <label/>
-        </settings>
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Ticket Information</item>
+            </item>
+        </argument>
 
-        <field name="requester" sortOrder="10" formElement="input">
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                    <rule name="validate-email" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>text</dataType>
-                <label translate="true">Requester Email</label>
-                <dataScope>requester</dataScope>
-            </settings>
+        <field name="requester">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">Requester Email</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-email" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
         </field>
 
-        <field name="requester_name" sortOrder="20" formElement="input">
-            <settings>
-                <dataType>text</dataType>
-                <label translate="true">Requester Name</label>
-                <dataScope>requester_name</dataScope>
-            </settings>
+        <field name="requester_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">Requester Name</item>
+                </item>
+            </argument>
         </field>
 
-        <field name="website_id" formElement="select">
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>int</dataType>
-                <label translate="true">Requester Website</label>
-                <dataScope>website_id</dataScope>
-            </settings>
-            <formElements>
-                <select>
-                    <settings>
-                        <options class="Magento\Store\Model\ResourceModel\Website\Collection"/>
-                    </settings>
-                </select>
-            </formElements>
+        <field name="website_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Store\Model\ResourceModel\Website\Collection</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Requester Website</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
         </field>
 
-        <field name="subject" sortOrder="30" formElement="input">
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>text</dataType>
-                <label translate="true">Subject</label>
-                <dataScope>subject</dataScope>
-            </settings>
+        <field name="subject">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">Subject</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
         </field>
 
-        <field name="status" formElement="select">
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>string</dataType>
-                <label translate="true">Status</label>
-                <dataScope>status</dataScope>
-            </settings>
-            <formElements>
-                <select>
-                    <settings>
-                        <options class="Wagento\Zendesk\Model\Config\Source\Ticket\Status"/>
-                    </settings>
-                </select>
-            </formElements>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Store\Model\ResourceModel\Website\Collection</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Send Welcome Email From</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
         </field>
 
-        <field name="type" formElement="select">
-            <settings>
-                <dataType>string</dataType>
-                <label translate="true">Type</label>
-                <dataScope>type</dataScope>
-            </settings>
-            <formElements>
-                <select>
-                    <settings>
-                        <options class="Wagento\Zendesk\Model\Config\Source\Ticket\Type"/>
-                    </settings>
-                </select>
-            </formElements>
+        <field name="type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Wagento\Zendesk\Model\Config\Source\Ticket\Type</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Type</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
         </field>
 
-        <field name="priority" formElement="select">
-            <settings>
-                <dataType>string</dataType>
-                <label translate="true">Priority</label>
-                <dataScope>priority</dataScope>
-            </settings>
-            <formElements>
-                <select>
-                    <settings>
-                        <options class="Wagento\Zendesk\Model\Config\Source\Ticket\Priority"/>
-                    </settings>
-                </select>
-            </formElements>
+        <field name="priority">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Wagento\Zendesk\Model\Config\Source\Ticket\Priority</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Priority</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
         </field>
 
 
-        <field name="description" sortOrder="70" formElement="textarea">
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>text</dataType>
-                <label translate="true">Description</label>
-                <dataScope>description</dataScope>
-            </settings>
+        <field name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">Description</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
         </field>
     </fieldset>
 
-    <fieldset name="options" sortOrder="30">
-        <settings>
-            <collapsible>true</collapsible>
-            <opened>true</opened>
-            <label translate="true">Add Options</label>
-        </settings>
-        <container name="add_order" sortOrder="10">
+   <!-- <fieldset name="options">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Add Options</item>
+            </item>
+        </argument>
+        <container name="add_order">
             <htmlContent name="html_content">
                 <block name="add_options" class="Wagento\Zendesk\Block\Adminhtml\Ticket\Edit\Tab\Options" />
             </htmlContent>
         </container>
-    </fieldset>
+    </fieldset>-->
 
 </form>

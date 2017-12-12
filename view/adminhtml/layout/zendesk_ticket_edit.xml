@@ -12,6 +12,7 @@
     <body>
         <referenceContainer name="content">
             <uiComponent name="zendesk_ticket_form"/>
+            <block class="Wagento\Zendesk\Block\Adminhtml\Ticket\Edit\Tab\Options" name="add_options"/>
         </referenceContainer>
     </body>
 </page>

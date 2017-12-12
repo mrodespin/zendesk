@@ -79,16 +79,21 @@ class Form extends Template
         if (!($customerId = $this->customerSession->getCustomerId())) {
             return false;
         }
-        $this->orders = $this->orderCollectionFactory->create($customerId)
-            ->addFieldToSelect(
-                ['value' => 'entity_id', 'label' => 'increment_id']
-            )->addFieldToFilter(
-                'status',
-                ['in' => $this->orderConfig->getVisibleOnFrontStatuses()]
-            )->setOrder(
-                'created_at',
-                'desc'
-            );
+        if (!$this->orders) {
+            $this->orders = $this->orderCollectionFactory->create()
+                ->addFieldToSelect(
+                    ['value' => 'entity_id', 'label' => 'increment_id']
+                )->addFieldToFilter(
+                    'customer_id',
+                    $customerId
+                )->addFieldToFilter(
+                    'status',
+                    ['in' => $this->orderConfig->getVisibleOnFrontStatuses()]
+                )->setOrder(
+                    'created_at',
+                    'desc'
+                );
+        }
         return $this->orders->getData();
     }
 
