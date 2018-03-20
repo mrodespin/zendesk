@@ -51,7 +51,7 @@ class AppInstallation extends \Magento\Config\Block\System\Config\Form\Field
         )->setData(
             [
                 'id' => 'zendesk_m2_app_installation_btn',
-                'label' => __('Install app'),
+                'label' => __('Install or Upate App'),
             ]
         );
         return $button->toHtml();

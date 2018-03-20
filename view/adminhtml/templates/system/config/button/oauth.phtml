@@ -21,7 +21,7 @@ $scope = $block->getScopeConfig();
                             "scopeId": '<?php echo $scope['scopeId'] ?>'
                         },
                         onSuccess: function (response) {
-                            window.location.reload();
+                            jQuery('#config-edit-form').submit();
                         }
                     });
                 });
@@ -80,7 +80,7 @@ $scope = $block->getScopeConfig();
                                         var checkConnect = setInterval(function () {
                                             if (!win || !win.closed) return;
                                             clearInterval(checkConnect);
-                                            window.location.reload();
+                                            jQuery('#config-edit-form').submit();
                                         }, 100);
 
                                         win.location.href = redirectUrl;

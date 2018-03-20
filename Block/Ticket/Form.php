@@ -26,7 +26,7 @@ class Form extends Template
      */
     private $orderCollectionFactory;
     /**
-     * @var \Magento\Customer\Model\Session
+     * @var \Magento\Customer\Model\SessionFactory
      */
     private $customerSession;
     /**
@@ -45,7 +45,7 @@ class Form extends Template
      * @param \Wagento\Zendesk\Model\Config\Source\Ticket\Priority $priority
      * @param \Wagento\Zendesk\Model\Config\Source\Ticket\Type $type
      * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
-     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Customer\Model\SessionFactory $customerSession
      * @param \Magento\Sales\Model\Order\Config $orderConfig
      * @param array $data
      */
@@ -55,7 +55,7 @@ class Form extends Template
         \Wagento\Zendesk\Model\Config\Source\Ticket\Priority $priority,
         \Wagento\Zendesk\Model\Config\Source\Ticket\Type $type,
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
-        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Customer\Model\SessionFactory $customerSession,
         \Magento\Sales\Model\Order\Config $orderConfig,
         array $data = []
     ) {
@@ -72,12 +72,12 @@ class Form extends Template
     /**
      * Get Customer Orders.
      *
-     * @return array | bool
+     * @return array
      */
     public function getOrders()
     {
-        if (!($customerId = $this->customerSession->getCustomerId())) {
-            return false;
+        if (!($customerId = $this->customerSession->create()->getCustomerId())) {
+            return [];
         }
         $this->orders = $this->orderCollectionFactory->create($customerId)
             ->addFieldToSelect(

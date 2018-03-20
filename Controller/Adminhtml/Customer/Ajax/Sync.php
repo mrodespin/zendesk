@@ -73,7 +73,7 @@ class Sync extends Action
             $customers = $customerList->getItems();
 
             foreach ($customers as $customer) {
-                $this->event->dispatch('customer_save_after_data_object', ['customer' => $customer]);
+                $this->event->dispatch('customer_admin_sync', ['customer' => $customer]);
             }
             $res['success'] = 'Success';
         } catch (\Exception $exception) {

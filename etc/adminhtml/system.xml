@@ -63,7 +63,7 @@
                 <field id="token" type="label" sortOrder="40"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Authorization Token</label>
-                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <frontend_model>Wagento\Zendesk\Block\System\Config\Form\Token</frontend_model>
                 </field>
             </group>
 
@@ -194,7 +194,7 @@
                 <field id="sync_customer_btn" type="button" sortOrder="30"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Wagento\Zendesk\Block\System\Config\Form\Customersync</frontend_model>
-                    <comment>Only if customers synchronization is enabled</comment>
+                    <comment>Note this can take long time arround 2h for 300 customers.</comment>
                     <depends>
                         <field id="enable_attribute_sync">1</field>
                     </depends>
