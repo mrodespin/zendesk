@@ -32,14 +32,12 @@ class Sync extends Action
 
     /**
      * Sync constructor.
-     * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
      * @param \Magento\Framework\Api\FilterBuilder $filterBuilder
      * @param Context $context
      */
     public function __construct(
-        \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
         \Magento\Framework\Api\FilterBuilder $filterBuilder,
@@ -47,7 +45,7 @@ class Sync extends Action
     ) {
     
         parent::__construct($context);
-        $this->event = $eventManager;
+        $this->event = $context->getEventManager();
         $this->customerRepository = $customerRepository;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterBuilder = $filterBuilder;
@@ -59,7 +57,6 @@ class Sync extends Action
      * Note: Request will be added as operation argument in future
      *
      * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
-     * @throws \Magento\Framework\Exception\NotFoundException
      */
     public function execute()
     {
