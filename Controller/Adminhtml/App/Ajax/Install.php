@@ -12,7 +12,6 @@ use Magento\Framework\Controller\ResultFactory;
 class Install extends Action
 {
     const ZENDESK_M2_APP_ID = "136787";
-    const ZENDESK_M2_APP_INSTALLATION_DATA = 'zendesk/m2_app/installation_data';
 
     /**
      * @var \Wagento\Zendesk\Helper\Api\Apps
@@ -78,75 +77,72 @@ class Install extends Action
 
         /** @var \Magento\Framework\Controller\Result\Json $resultJson */
         $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
-
-        $config = $this->scopeConfig->getValue(self::ZENDESK_M2_APP_INSTALLATION_DATA);
-        $data = json_decode($config, true);
-
-        if ((isset($data['integration_id']) && is_numeric($data['integration_id']))
-            && isset($data['installation_id']) && is_numeric($data['installation_id'])) {
-            return $resultJson->setData(['error' => 'Nothing to install.']);
-        }
-
-        $integrationId = null;
-        $installationId = null;
         $res = [];
 
-        if (isset($data['integration_id'])) {
-            $integrationId = $data['integration_id'];
-        } else {
-            // Generate Token
-            $integrationData = [
-                'name' => 'm2appzendesk',
-                'email' => '',
-                'endpoint' => '',
-                'identity_link_url' => '',
-                'current_password' => '',
-                'all_resources' => '',
-                'resource' => [
-                    'Wagento_Zendesk::zendesk_api'
-                ],
-            ];
+        /*
+         * MAGENTO REST INTEGRATION
+         */
+        $integrationData = [
+            'name' => 'm2appzendesk',
+            'email' => '',
+            'endpoint' => '',
+            'identity_link_url' => '',
+            'current_password' => '',
+            'all_resources' => '',
+            'resource' => [
+                'Wagento_Zendesk::zendesk_api'
+            ],
+        ];
 
+        /** @var \Magento\Integration\Model\Integration $integration */
+        $integration = $this->integrationService->findByName('m2appzendesk');
+        if ($integration->getConsumerId()) {
+            // Update existing integration
+            $finalData = array_merge($integration->getData(), $integrationData);
+            $integration = $this->integrationService->update($finalData);
+        } else {
+            //Create new integration
+            $integration = $this->integrationService->create($integrationData);
+        }
+
+        // Activate integration if status is inactive
+        $integrationId = $integration->getConsumerId();
+        if ($integration->getConsumerId() && !$integration->getStatus()) {
             try {
-                /** @var \Magento\Integration\Model\Integration $integration */
-                $integration = $this->integrationService->create($integrationData);
-                $integrationId = $integration->getConsumerId();
                 $clearExistingToken = (int)$this->getRequest()->getParam('reauthorize', 0);
                 if ($this->oauthService->createAccessToken($integrationId, $clearExistingToken)) {
                     $integration->setStatus(\Magento\Integration\Model\Integration::STATUS_ACTIVE)->save();
                 }
             } catch (\Exception $exception) {
-                return $resultJson->setData(['error' => 'Something went wrong.']);
+                return $resultJson->setData(['error' => 'Something wrong has happened']);
             }
         }
 
-        if (!isset($data['installation_id']) && is_numeric($integrationId)) {
+        /*
+         * ZENDESK APP INSTALLATION
+         */
+        $app_array = $this->apps->listAppInstallations();
+        $apps = array_column($app_array, 'app_id', 'id');
 
-            /** @var \Magento\Integration\Model\Oauth\Token $accessToken */
-            $accessToken = $this->oauthService->getAccessToken($integrationId);
-            if ($accessToken) {
-                $appParams = [
-                    'name' => 'Magento 2 Connector by Wagento',
-                    'domain' => $this->_url->getBaseUrl(),
-                    'token' => $accessToken->getToken(),
-                ];
-
-                // Install App
-                $installationId = $this->apps->installApp(self::ZENDESK_M2_APP_ID, $appParams);
-                if (is_numeric($installationId)) {
-                    $res = ['success' => 'Successfully installed'];
-                } else {
-                    $res = ['error' => 'Can\'t install APP.'];
-                }
-            }
-        }
-
-        $data = [
-            'integration_id' => $integrationId,
-            'installation_id' => $installationId
+        // Prepare parameters to install or update
+        /** @var \Magento\Integration\Model\Oauth\Token $accessToken */
+        $accessToken = $this->oauthService->getAccessToken($integrationId);
+        $appParams = [
+            'domain' => $this->_url->getBaseUrl(),
+            'token' => $accessToken->getToken(),
         ];
-        // saved integration id in zendesk/m2_app/installation_id config path
-        $this->configWriter->save(self::ZENDESK_M2_APP_INSTALLATION_DATA, json_encode($data));
+
+        // Check if we already have app installed
+        if ($installationId = array_search(self::ZENDESK_M2_APP_ID, $apps)) {
+            $updateId = $this->apps->updateApp($installationId, $appParams);
+            $res = is_numeric($updateId) ? ['success' => 'Succesfully updated'] : ['error' => 'Can\'t update app.'];
+        } else {
+            // Install App
+            $appParams['name'] = 'Magento 2 Connector by Wagento';
+            $installationId = $this->apps->installApp(self::ZENDESK_M2_APP_ID, $appParams);
+            $res = is_numeric($installationId) ? ['success' => 'Succesfully installed'] : ['error' => 'Can\'t install app.'];
+        }
+
         return $resultJson->setData($res);
     }
 }

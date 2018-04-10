@@ -13,7 +13,7 @@
     },
     "minimum-stability": "dev",
     "type": "magento2-module",
-    "version": "100.0.0",
+    "version": "220.0.1",
     "autoload": {
         "psr-4": {
             "Wagento\\Zendesk\\": ""

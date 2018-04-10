@@ -55,6 +55,9 @@ class Data extends AbstractHelper
         parent::__construct($context);
         $this->encryptor = $encryptor;
         $this->configWriter = $configWriter;
+
+        //clean core_config cache values
+        $this->scopeConfig->clean();
     }
 
     /**

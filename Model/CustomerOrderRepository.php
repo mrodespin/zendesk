@@ -136,7 +136,7 @@ class CustomerOrderRepository implements CustomerOrderRepositoryInterface
             )->where(
                 'customer_email = ?',
                 $email
-            )->order(['id DESC'])
+            )->order(['entity_id DESC'])
                 ->limit(1);
             $customerData = $orderConnection->fetchRow($select);
         }
