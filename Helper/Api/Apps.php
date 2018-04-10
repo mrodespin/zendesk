@@ -23,6 +23,9 @@ class Apps extends AbstractApi
     // Delete App: DELETE /api/v2/apps/{id}.json
     const DELETE_APP = '/api/v2/apps/%s.json';
 
+    // Update App: UPDATE /api/v2/apps/installations/{id}.json
+    const UPDATE_APP = '/api/v2/apps/installations/%s.json';
+
     /**
      * @param $id
      * @return bool
@@ -75,6 +78,21 @@ class Apps extends AbstractApi
         $data = json_decode($response, true);
         return isset($data['installations']) ? $data['installations'] : [];
     }
+
+    /**
+     * @param $appId
+     * @param $setting
+     * @return null
+     */
+    public function updateApp($appId, $setting)
+    {
+        $endpoint = sprintf(self::UPDATE_APP, $appId);
+        $params = json_encode(['settings' => $setting]);
+        $response = $this->put($endpoint, $params);
+        $data = json_decode($response, true);
+        return isset($data['id']) ? $data['id'] : null;
+    }
+
 
     /**
      * Deletes the specified app and removes it from the Manage pages in Zendesk Support.
