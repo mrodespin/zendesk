@@ -6,9 +6,9 @@ We are adding a new version management to make module installation available thr
 
 Magento Version | Composer prefix 
 ----            | ---- 
-2.0.x           | 220.x.x 
+2.0.x           | 200.x.x 
 2.1.x           | 210.x.x
-2.2.x           | 200.x.x
+2.2.x           | 220.x.x
 
 So if you are in magento 2.0.x to install by composer just execute: `composer require wagento/zendesk:200.0.1`
 
