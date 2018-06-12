@@ -1,3 +1,6 @@
+## FOR SUPPORT PLEASE CONTACT THE FOLLOWING
+support@mage365.zendesk.com
+
 ## Introduction
 This official Zendesk module developed by wagento.
 
@@ -15,7 +18,7 @@ So if you are in magento 2.0.x to install by composer just execute: `composer re
 BUT in file `etc/module.xml` version will be the same for all composer version, use `setup_version` as global version reference.
 
 ## Support
-If you are facing any issue with module installation and configuration please send an emil to support@wagento.com
+If you are facing any issue with module installation and configuration please send an email to support@mage365.zendesk.com
 
 ## Changelog
 Based in `setup_version`
