@@ -3,6 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Wagento\Zendesk\Observer;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -18,8 +19,6 @@ class AdminZendesk implements ObserverInterface
     const PATH_ZENDESK_CONTACT_US_EMAIL_BAK = 'zendesk/ticket/frontend/contact_us_email_bak';
     const PATH_CONTACT_US_EMAIL = 'contact/email/recipient_email';
 
-    // TICKET ORDER FIELD
-    const PATH_ZENDESK_ORDER_FIELD_ENABLE = 'zendesk/ticket/add_order_number';
     const PATH_ZENDESK_ORDER_FIELD_ID = 'zendesk/ticket/order_field_id';
     const ORDER_FIELD_LABEL = 'Magento 2 Order Number';
 
@@ -74,8 +73,9 @@ class AdminZendesk implements ObserverInterface
         \Wagento\Zendesk\Helper\Api\TicketField $ticketField,
         \Wagento\Zendesk\Helper\Api\UserField $userField,
         \Magento\Framework\Message\ManagerInterface $messageManager
-    ) {
-    
+    )
+    {
+
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
         $this->writer = $writer;
@@ -152,63 +152,61 @@ class AdminZendesk implements ObserverInterface
      */
     private function configureOrderCustomField($scope, $storeCode, $scopeId)
     {
-        $enableOrderField = $this->scopeConfig->getValue(self::PATH_ZENDESK_ORDER_FIELD_ENABLE, $scope, $storeCode);
 
-        if ($enableOrderField) {
-            // MSaved ticket order fieldID
-            $orderFieldId = $this->scopeConfig->getValue(self::PATH_ZENDESK_ORDER_FIELD_ID, $scope, $storeCode);
+        // MSaved ticket order fieldID
+        $orderFieldId = $this->scopeConfig->getValue(self::PATH_ZENDESK_ORDER_FIELD_ID, $scope, $storeCode);
 
-            if ($orderFieldId) {
-                // Validate ticket order field
-                $data = $this->ticketField->showTicketField($orderFieldId);
-                if ($data) {
-                    // Validate field by type and title
-                    $validateTitle = isset($data['title']) && $data['title'] == self::ORDER_FIELD_LABEL;
-                    $validateType = isset($data['type']) && $data['type'] == 'text';
-                    if ($validateTitle && $validateType) {
-                        return;
-                    }
+        if ($orderFieldId) {
+            // Validate ticket order field
+            $data = $this->ticketField->showTicketField($orderFieldId);
+            if ($data) {
+                // Validate field by type and title
+                $validateTitle = isset($data['title']) && $data['title'] == self::ORDER_FIELD_LABEL;
+                $validateType = isset($data['type']) && $data['type'] == 'text';
+                if ($validateTitle && $validateType) {
+                    return;
                 }
             }
+        }
 
-            // Save field
-            // search for created tickets
-            $orderFields = $this->ticketField->getList();
-            $userFieldKeys = array_column($orderFields, 'title', 'id');
-            $filterId = array_keys($userFieldKeys, self::ORDER_FIELD_LABEL);
+        // Save field
+        // search for created tickets
+        $orderFields = $this->ticketField->getList();
+        $userFieldKeys = array_column($orderFields, 'title', 'id');
+        $filterId = array_keys($userFieldKeys, self::ORDER_FIELD_LABEL);
 
-            if (count($filterId) == 0) {
-                // create field
-                $orderField = [
-                    'type' => 'text',
-                    'title' => self::ORDER_FIELD_LABEL,
-                    'description' => self::ORDER_FIELD_LABEL,
-                    'position' => 1,
-                ];
+        if (count($filterId) == 0) {
+            // create field
+            $orderField = [
+                'type' => 'text',
+                'title' => self::ORDER_FIELD_LABEL,
+                'description' => self::ORDER_FIELD_LABEL,
+                'position' => 1,
+            ];
 
-                $zdTicketOrderFieldId = $this->ticketField->createTicketField($orderField);
-                if ($zdTicketOrderFieldId) {
-                    $message = __('Customer field Created Successfully');
-                }
-            } elseif (count($filterId) == 1) {
-                // Verify that only exists one field.
-                $zdTicketOrderFieldId = $filterId['0'];
-                $message = __('Order field updated successfully.');
-            } else {
-                // If result has many send message for correction.
-                $url = $this->getUrl('/agent/admin/ticket_fields', $scope, $storeCode);
-                $message = __(
-                    'Your Zendesk account has many Order Fields created, please <a href="%1" target="_blank">click here</a> to review.',
-                    $url
-                );
-                $this->messageManager->addError($message);
-                return;
+            $zdTicketOrderFieldId = $this->ticketField->createTicketField($orderField);
+            if ($zdTicketOrderFieldId) {
+                $message = __('Order field added successfully.');
             }
+        } elseif (count($filterId) == 1) {
+            // Verify that only exists one field.
+            $zdTicketOrderFieldId = $filterId['0'];
+            $message = __('Order field updated successfully.');
+        } else {
+            // If result has many send message for correction.
+            $url = $this->getUrl('/agent/admin/ticket_fields', $scope, $storeCode);
+            $message = __(
+                'Your Zendesk account has many Order Fields created, please <a href="%1" target="_blank">click here</a> to review.',
+                $url
+            );
+            $this->messageManager->addError($message);
+            return;
+        }
 
-            if (is_numeric($zdTicketOrderFieldId)) {
-                $this->messageManager->addSuccessMessage($message);
-                $this->writer->save(self::PATH_ZENDESK_ORDER_FIELD_ID, $zdTicketOrderFieldId, $scope, $scopeId);
-            }
+        if (is_numeric($zdTicketOrderFieldId)) {
+            $this->messageManager->addSuccessMessage($message);
+            $this->writer->save(self::PATH_ZENDESK_ORDER_FIELD_ID, $zdTicketOrderFieldId, $scope, $scopeId);
+            $this->zendeskHelper->cleanCacheConfig();
         }
     }
 

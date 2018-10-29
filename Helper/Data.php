@@ -38,6 +38,10 @@ class Data extends AbstractHelper
      * @var \Magento\Framework\App\Config\Storage\WriterInterface
      */
     private $configWriter;
+    /**
+     * @var \Magento\Framework\App\Cache\TypeListInterface
+     */
+    private $typeList;
 
     /**
      * Data constructor.
@@ -49,15 +53,14 @@ class Data extends AbstractHelper
     public function __construct(
         Context $context,
         \Magento\Framework\Encryption\EncryptorInterface $encryptor,
-        \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
+        \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
+        \Magento\Framework\App\Cache\TypeListInterface $typeList
     ) {
     
         parent::__construct($context);
         $this->encryptor = $encryptor;
         $this->configWriter = $configWriter;
-
-        //clean core_config cache values
-        $this->scopeConfig->clean();
+        $this->typeList = $typeList;
     }
 
     /**
@@ -233,5 +236,9 @@ class Data extends AbstractHelper
                 return $pathBase . $domain . '/' . $id;
                 break;
         }
+    }
+
+    public function cleanCacheConfig() {
+        $this->typeList->cleanType('config');
     }
 }

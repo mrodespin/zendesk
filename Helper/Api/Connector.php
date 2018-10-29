@@ -97,6 +97,7 @@ class Connector extends \Wagento\Zendesk\Helper\Api\AbstractApi
             $this->zendeskHelper->setSubdomain($config['subdomain'], $scope, $scopeId);
             $this->zendeskHelper->setSecret($config['client_secret'], $scope, $scopeId);
 
+            $this->zendeskHelper->cleanCacheConfig();
             return true;
         }
         return false;
@@ -110,6 +111,7 @@ class Connector extends \Wagento\Zendesk\Helper\Api\AbstractApi
     public function saveToken($token)
     {
         $this->zendeskHelper->setToken($token);
+        $this->zendeskHelper->cleanCacheConfig();
     }
 
     /**

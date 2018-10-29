@@ -10,7 +10,6 @@
     <default>
         <zendesk>
             <ticket>
-                <add_order_number>1</add_order_number>
                 <frontend>
                     <customer_account_order_ticket>1</customer_account_order_ticket>
                 </frontend>

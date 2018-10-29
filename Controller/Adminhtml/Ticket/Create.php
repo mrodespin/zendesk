@@ -86,15 +86,14 @@ class Create extends Action
         $websiteId = trim($data["website_id"]);
         /** Create the Request Id */
         $requestId = $this->createRequest($requester, $requesterName, $websiteId);
-        $submitterId = $this->getSubmitterId() ? $this->getSubmitterId() : "";
         $ticket = [
             'requester_id' => $requestId,
-            'submitter_id' => $submitterId,
+            'submitter_id' => $requestId,
             'subject' => $data['subject'],
             'status' => $data['status'],
             'priority' => $data['priority'],
             'comment' => [
-                'value' => $data['description']
+                'body' => $data['description']
             ]
         ];
         /** Add additional options  */
@@ -102,14 +101,15 @@ class Create extends Action
             $ticket['type'] = $data['type'];
         }
 
-        if ($fieldId = $this->helper->getOrderField() && isset($data['order_id']) && strlen(trim($data['order_id'])) > 0) {
-            $ticket['fields'] = [
+        $fieldId = $this->helper->getOrderField();
+        if ($fieldId && isset($data['order_id']) && strlen(trim($data['order_id'])) > 0) {
+            $ticket['custom_fields'][] = [
                 'id' => $fieldId,
                 'value' => $data['order_id']
             ];
         }
 
-        $ticketId = $this->ticket->create($data);
+        $ticketId = $this->ticket->create($ticket);
         if (isset($ticketId)) {
             $this->messageManager->addSuccessMessage(sprintf('Ticket Created successfully, the id is %s.', $ticketId));
             return $resultRedirect->setPath('*/*');
@@ -188,6 +188,7 @@ class Create extends Action
     /**
      * Return the submitter Id
      * @return int $submiterId
+     * @deprecated
      */
     public function getSubmitterId()
     {

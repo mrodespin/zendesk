@@ -16,6 +16,10 @@ class Oauth extends \Magento\Config\Block\System\Config\Form\Field
      * @var \Wagento\Zendesk\Helper\Data
      */
     private $zendeskHelper;
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $scopeConfig;
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
@@ -26,11 +30,13 @@ class Oauth extends \Magento\Config\Block\System\Config\Form\Field
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Wagento\Zendesk\Helper\Data $zendeskHelper,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         array $data = []
     ) {
     
         parent::__construct($context, $data);
         $this->zendeskHelper = $zendeskHelper;
+        $this->scopeConfig = $scopeConfig;
     }
 
     /**
@@ -133,5 +139,12 @@ class Oauth extends \Magento\Config\Block\System\Config\Form\Field
     {
         $token = $this->zendeskHelper->getToken();
         return $token ? true : false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFrontBaseUrl() {
+        return $this->scopeConfig->getValue('web/secure/base_url');
     }
 }

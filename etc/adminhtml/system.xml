@@ -71,6 +71,14 @@
             <group id="ticket" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Ticket Configuration</label>
 
+                <field id="order_field_id" type="label" sortOrder="0" translate="label comment"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ticket Order Number Field Id</label>
+                    <comment>
+                        Used to link order in Magento with tickets in Zendesk Support.
+                    </comment>
+                </field>
+
                 <field id="type" type="select" sortOrder="0" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Default Value for Type</label>
@@ -87,24 +95,6 @@
                        showInStore="1">
                     <label>Default Value for Priority</label>
                     <source_model>Wagento\Zendesk\Model\Config\Source\Ticket\Priority</source_model>
-                </field>
-
-                <field id="add_order_number" type="select" sortOrder="0" showInDefault="1" showInWebsite="1"
-                       showInStore="1">
-                    <label>Include Order Number</label>
-                    <comment>(This wil send order number when creating a ticket, if it is related to an order)</comment>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-
-                <field id="order_field_id" type="label" sortOrder="0" translate="label comment"
-                       showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Ticket Order Number Field Id</label>
-                    <comment>
-                        Used to link order in Magento with tickets in Zendesk Support.
-                    </comment>
-                    <depends>
-                        <field id="add_order_number">1</field>
-                    </depends>
                 </field>
 
                 <group id="frontend" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -128,18 +118,7 @@
                         <label>Add “Open Ticket” Action To Order List</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <comment>This feature is only available if "Include Order Number" is set as yes.</comment>
-                        <depends>
-                            <field id="*/ticket/add_order_number">1</field>
-                        </depends>
                     </field>
-                    <!--
-                    TODO: discuss benefits of disabling enabling ticket conversation
-                    <field id="customer_ticket_view" type="select" showInDefault="1" showInWebsite="1"
-                           showInStore="1">
-                        <label>Show Ticket Conversation</label>
-                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    </field>
-                    -->
                     <field id="customer_ticket_view_comment" type="select" showInDefault="1" showInWebsite="1"
                            showInStore="1">
                         <label>Customer Can Comment In Ticket</label>
@@ -160,9 +139,6 @@
                     <field id="order_view" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Show Order’s Ticket List in Order View</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                        <depends>
-                            <field id="*/ticket/add_order_number">1</field>
-                        </depends>
                     </field>
                 </group>
             </group>

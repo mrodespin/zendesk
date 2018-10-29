@@ -125,6 +125,6 @@ class View extends Template
      */
     public function canComment()
     {
-        $this->_scopeConfig->getValue(self::PATH_CAN_COMMENT);
+        return $this->_scopeConfig->getValue(self::PATH_CAN_COMMENT);
     }
 }

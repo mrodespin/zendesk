@@ -15,10 +15,10 @@
             <block class="Wagento\Zendesk\Block\Ticket\View" name="ticket.status"
                    template="Wagento_Zendesk::ticket/ticket_status.phtml"/>
         </referenceContainer>
-
+        <!-- Don't cache this view-->
         <referenceContainer name="content">
             <block class="Wagento\Zendesk\Block\Ticket\View" name="ticket_history" as="ticket.history"
-                   template="Wagento_Zendesk::ticket/view.phtml">
+                   template="Wagento_Zendesk::ticket/view.phtml" cacheable="false">
             </block>
         </referenceContainer>
 

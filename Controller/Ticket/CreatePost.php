@@ -90,14 +90,11 @@ class CreatePost extends AbstractUserAuthentication
             }
 
             // Verify order number send
-            $sendOrderNumber = $this->scopeConfig->getValue('zendesk/ticket/add_order_number');
-            if ($sendOrderNumber && isset($data['order']) && $data['order'] != -1) {
+            if (isset($data['order']) && $data['order'] != -1) {
                 $ticketFieldId = $this->scopeConfig->getValue('zendesk/ticket/order_field_id');
-                $params['custom_fields'] = [
-                    [
-                        'id' => $ticketFieldId,
-                        'value' => $data['order']
-                    ]
+                $params['custom_fields'][] = [
+                    'id' => $ticketFieldId,
+                    'value' => $data['order']
                 ];
                 // assign order id param in case something went wrong
                 $backParams['orderid'] = $data['order'];

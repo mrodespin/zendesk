@@ -111,14 +111,4 @@ class Form extends Template
     {
         return $this->getRequest()->getParam('orderid', false);
     }
-
-    /**
-     * Can show Order Field.
-     *
-     * @return mixed
-     */
-    public function canDisplayOrderField()
-    {
-        return $this->_scopeConfig->getValue('zendesk/ticket/add_order_number');
-    }
 }

@@ -19,15 +19,6 @@ class OpenTicket extends Template
     }
 
     /**
-     * @return mixed
-     */
-    public function canDisplay()
-    {
-        // Validate param orderid
-        return $this->getData('orderid') && $this->_scopeConfig->getValue('zendesk/ticket/add_order_number');
-    }
-
-    /**
      * @return string
      */
     public function getOpenTicketUrl()

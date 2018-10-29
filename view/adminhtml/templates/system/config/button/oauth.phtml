@@ -73,7 +73,7 @@ $scope = $block->getScopeConfig();
                                         win.focus();
                                         /*******************[ URL ]*******************/
                                         var route = 'zendesk/index/index/';
-                                        url.setBaseUrl('<?php echo $block->getBaseUrl();?>');
+                                        url.setBaseUrl('<?php echo $block->getFrontBaseUrl();?>');
                                         var redirectUrl = url.build(route + res.hash);
 
                                         /*******************[ OAUTH ]*******************/

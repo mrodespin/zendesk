@@ -128,7 +128,7 @@ class Install extends Action
         /** @var \Magento\Integration\Model\Oauth\Token $accessToken */
         $accessToken = $this->oauthService->getAccessToken($integrationId);
         $appParams = [
-            'domain' => $this->_url->getBaseUrl(),
+            'domain' => $this->getFrontBaseUrl(),
             'token' => $accessToken->getToken(),
         ];
 
@@ -144,5 +144,12 @@ class Install extends Action
         }
 
         return $resultJson->setData($res);
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getFrontBaseUrl() {
+        return $this->scopeConfig->getValue('web/secure/base_url');
     }
 }

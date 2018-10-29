@@ -185,6 +185,6 @@ class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getGridUrl()
     {
-        return $this->getUrl('zendesk/page_widget/chooser', ['_current' => true]);
+        return $this->getUrl('zendesk/widget_order/chooser', ['_current' => true]);
     }
 }

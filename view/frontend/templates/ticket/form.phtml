@@ -16,22 +16,22 @@
             </div>
         </div>
 
-        <?php if ($block->canDisplayOrderField()): ?>
-            <div class="field order">
-                <label class="label" for="order"><span><?= __('Order Number'); ?></span></label>
-                <div class="control">
-                    <select name="order" id="order">
-                        <option value="-1"><?= __('No order selected'); ?></option>
-                        <?php foreach ($block->getOrders() as $order): ?>
-                            <option <?= $block->getRequestedOrderId() == $order['value'] ? 'selected' : ''; ?>
-                                    value="<?= $order['label']; ?>">
-                                <?= $order['label']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+
+        <div class="field order">
+            <label class="label" for="order"><span><?= __('Order Number'); ?></span></label>
+            <div class="control">
+                <select name="order" id="order">
+                    <option value="-1"><?= __('No order selected'); ?></option>
+                    <?php foreach ($block->getOrders() as $order): ?>
+                        <option <?= $block->getRequestedOrderId() == $order['value'] ? 'selected' : ''; ?>
+                                value="<?= $order['label']; ?>">
+                            <?= $order['label']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-        <?php endif; ?>
+        </div>
+
 
         <div class="field comment required">
             <label class="label" for="comment"><span><?= __('Comment'); ?></span></label>
