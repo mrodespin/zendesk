@@ -22,6 +22,14 @@ If you are facing any issue with module installation and configuration please se
 
 ## Changelog
 Based in `setup_version`
+v1.0.2
+- Fixed Customer grid from `Zendesk > Tickets > Create Ticket > Select Customer`.
+- Fixed Order grid from `Zendesk > Tickets > Create Ticket > Select Order`.
+- Fixed Customer can't see comment box even if "Customer Can Comment In Ticket" is enabled in `System > Zendesk > Zendesk Support > Ticket Configuration > Frontend Options > Customer Can Comment In Ticket`.
+- Fixed Zendesk can't open OAuth poup when backend has custom url.
+- Improved Order Ticket Field always will be created on zendesk platform and synced to magento store.
+- Improved Config Cache clean strategy and clean execution when config is saved to DB.
+
 
 v1.0.1
 - Fixed Authorization problem when user clicks Authorize button in admin
