@@ -6,7 +6,6 @@
 namespace Wagento\Zendesk\Setup;
 
 use Magento\Customer\Api\CustomerMetadataInterface;
-use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
@@ -16,7 +15,7 @@ class InstallData implements InstallDataInterface
     const ZD_USER_ID = 'zd_user_id';
 
     /**
-     * @var EavSetup
+     * @var \Magento\Eav\Setup\EavSetup
      */
     private $eavSetup;
     /**
@@ -26,11 +25,11 @@ class InstallData implements InstallDataInterface
 
     /**
      * InstallData constructor.
-     * @param EavSetup $eavSetup
+     * @param \Magento\Eav\Setup\EavSetup $eavSetup
      * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
-        EavSetup $eavSetup,
+        \Magento\Eav\Setup\EavSetup $eavSetup,
         \Magento\Eav\Model\Config $eavConfig
     ) {
     

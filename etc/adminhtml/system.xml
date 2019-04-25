@@ -38,7 +38,12 @@
                 <field id="zendesk_subdomain" translate="label comment" type="text" sortOrder="0"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Zendesk Subdomain</label>
-                    <comment>https://yoursubdomain.zendesk.com/</comment>
+                    <comment><![CDATA[https://<strong>yoursubdomain</strong>.zendesk.com/]]></comment>
+                </field>
+
+                <field id="m2_domain" translate="label comment" type="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Redirect URLs for Zendesk</label>
+                    <frontend_model>Wagento\Zendesk\Block\System\Config\Form\ZdUrlList</frontend_model>
                 </field>
 
                 <field id="client_id" translate="label comment" type="text" sortOrder="10"
@@ -167,8 +172,19 @@
                         <field id="enable_attribute_sync">1</field>
                     </depends>
                 </field>
-                <field id="sync_customer_btn" type="button" sortOrder="30"
-                       showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="sync_by_cron" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Cron Sync</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                        <strong>Recommended:</strong> This will sync missing customer every 15 mins
+                        ]]>
+                    </comment>
+                    <depends>
+                        <field id="enable_attribute_sync">1</field>
+                    </depends>
+                </field>
+                <field id="sync_customer_btn" type="button" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Wagento\Zendesk\Block\System\Config\Form\Customersync</frontend_model>
                     <comment>Note this can take long time arround 2h for 300 customers.</comment>
                     <depends>

@@ -145,6 +145,7 @@ class Oauth extends \Magento\Config\Block\System\Config\Form\Field
      * @return mixed
      */
     public function getFrontBaseUrl() {
+        // REPEATED refactor needed
         return $this->scopeConfig->getValue('web/secure/base_url');
     }
 }

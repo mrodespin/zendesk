@@ -9,15 +9,6 @@ use Magento\Framework\View\Element\Template;
 
 class OpenTicket extends Template
 {
-
-    public function __construct(
-        Template\Context $context,
-        array $data = []
-    ) {
-    
-        parent::__construct($context, $data);
-    }
-
     /**
      * @return string
      */

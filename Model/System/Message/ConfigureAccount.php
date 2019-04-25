@@ -7,7 +7,6 @@ namespace Wagento\Zendesk\Model\System\Message;
 
 class ConfigureAccount implements \Magento\Framework\Notification\MessageInterface
 {
-
     /**
      * @var \Magento\Framework\UrlInterface
      */
@@ -48,6 +47,7 @@ class ConfigureAccount implements \Magento\Framework\Notification\MessageInterfa
      */
     public function isDisplayed()
     {
+        // Remove zd direct request and do a one time check async
         return !$this->connector->validateConfiguredConnection();
     }
 

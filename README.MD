@@ -22,6 +22,12 @@ If you are facing any issue with module installation and configuration please se
 
 ## Changelog
 Based in `setup_version`
+v1.0.3
+- Added support for M2.3
+- Fixed template issue when enabling Open Ticket on recent order list
+- Added sync customer by cron
+- Added callback url information for zendesk API
+
 v1.0.2
 - Fixed Customer grid from `Zendesk > Tickets > Create Ticket > Select Customer`.
 - Fixed Order grid from `Zendesk > Tickets > Create Ticket > Select Order`.

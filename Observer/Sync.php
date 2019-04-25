@@ -80,7 +80,7 @@ class Sync implements ObserverInterface
 
         $zdUserIdAttribute = $customer->getCustomAttribute('zd_user_id');
 
-        if ($zdUserIdAttribute) {
+        if ($zdUserIdAttribute && $zdUserIdAttribute->getValue()) {
             // validate $zdUserIdAttribute
             $zdUserId = $zdUserIdAttribute->getValue();
             $data = $this->user->showUser($zdUserId);

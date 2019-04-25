@@ -3,6 +3,7 @@
  * Copyright Wagento Creative LLC ©, All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Wagento\Zendesk\Controller\Adminhtml\App\Ajax;
 
 use Magento\Backend\App\Action;
@@ -51,7 +52,7 @@ class Install extends Action
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
-    
+
         parent::__construct($context);
         $this->apps = $apps;
         $this->integrationService = $integrationService;
@@ -149,7 +150,9 @@ class Install extends Action
     /**
      * @return mixed
      */
-    private function getFrontBaseUrl() {
+    private function getFrontBaseUrl()
+    {
+        // REPEATED refactor needed
         return $this->scopeConfig->getValue('web/secure/base_url');
     }
 }
