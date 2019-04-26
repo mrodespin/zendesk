@@ -33,28 +33,40 @@ class Sync
      * @var \Magento\Framework\Api\FilterBuilder
      */
     private $filterBuilder;
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    private $scopeConfig;
 
-    public function __construct(\Magento\Backend\App\Action\Context $context,
-                                CollectionFactory $customerFactory,
-                                \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
-                                \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
-                                \Magento\Framework\Api\FilterBuilder $filterBuilder)
-    {
+    public function __construct(
+        \Magento\Backend\App\Action\Context $context,
+        CollectionFactory $customerFactory,
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
+        \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
+        \Magento\Framework\Api\FilterBuilder $filterBuilder,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+    ) {
         $this->event = $context->getEventManager();
         $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterBuilder = $filterBuilder;
+        $this->scopeConfig = $scopeConfig;
     }
 
-    public function execute(){
+    public function execute()
+    {
+        $isEnabled = $this->scopeConfig->getValue('zendesk/customer/sync_by_cron');
+
+        if($isEnabled) return;
+
         try {
             $customerCollection = $this->customerFactory->create();
             $customers = $customerCollection
                 ->addAttributeToFilter(array(
-                    array('attribute' => 'zd_user_id', 'null' => true ),
-                    array('attribute' => 'zd_user_id', 'eq' => '' ),
-                    array('attribute' => 'zd_user_id', 'eq' => 'NO FIELD' )
+                    array('attribute' => 'zd_user_id', 'null' => true),
+                    array('attribute' => 'zd_user_id', 'eq' => ''),
+                    array('attribute' => 'zd_user_id', 'eq' => 'NO FIELD')
                 ),
                     '',
                     'left')
