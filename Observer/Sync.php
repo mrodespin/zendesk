@@ -93,7 +93,7 @@ class Sync implements ObserverInterface
             // look for already created user
             $user = $this->user->searchUsers($email);
 
-            if (count($user) == 1 && isset($user[0]['id'])) {
+            if ($user !== null && count($user) == 1 && isset($user[0]['id'])) {
                 $zdUserId = $user[0]['id'];
             } else { // create user
                 $data = [
