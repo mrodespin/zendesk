@@ -22,6 +22,7 @@ If you are facing any issue with module installation and configuration please se
 
 ## Changelog
 Based in `setup_version`
+
 v1.0.4
 - Added support for M2.3
 - Fixed template issue when enabling Open Ticket on recent order list
