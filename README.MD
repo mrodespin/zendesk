@@ -1,5 +1,6 @@
 ## FOR SUPPORT PLEASE CONTACT THE FOLLOWING
-support@mage365.zendesk.com
+This free version is longer being supported if you would like the most recent version, you can find it on the marketplace.
+https://marketplace.magento.com/wagento-zendesk.html
 
 ## Introduction
 This official Zendesk module developed by wagento.
