@@ -70,6 +70,12 @@
                     <label>Authorization Token</label>
                     <frontend_model>Wagento\Zendesk\Block\System\Config\Form\Token</frontend_model>
                 </field>
+
+                <field id="connection_healtcheck_admin" type="select" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Connection Heltcheck On Admin</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
 
             <!-- TICKETS CONFIGURATION-->

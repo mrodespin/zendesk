@@ -7,6 +7,8 @@ namespace Wagento\Zendesk\Model\System\Message;
 
 class ConfigureAccount implements \Magento\Framework\Notification\MessageInterface
 {
+    const PATH_ADMIN_CHECK = 'zendesk/config/connection_healtcheck_admin';
+
     /**
      * @var \Magento\Framework\UrlInterface
      */
@@ -15,6 +17,10 @@ class ConfigureAccount implements \Magento\Framework\Notification\MessageInterfa
      * @var \Wagento\Zendesk\Helper\Api\Connector
      */
     private $connector;
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    private $scopeConfig;
 
     /**
      * ConfigureAccount constructor.
@@ -23,11 +29,13 @@ class ConfigureAccount implements \Magento\Framework\Notification\MessageInterfa
      */
     public function __construct(
         \Magento\Framework\UrlInterface $urlBuilder,
-        \Wagento\Zendesk\Helper\Api\Connector $connector
+        \Wagento\Zendesk\Helper\Api\Connector $connector,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
     
         $this->urlBuilder = $urlBuilder;
         $this->connector = $connector;
+        $this->scopeConfig = $scopeConfig;
     }
 
     /**
@@ -47,6 +55,9 @@ class ConfigureAccount implements \Magento\Framework\Notification\MessageInterfa
      */
     public function isDisplayed()
     {
+        if ($this->scopeConfig->getValue(self::PATH_ADMIN_CHECK) == 0) {
+            return false;
+        }
         // Remove zd direct request and do a one time check async
         return !$this->connector->validateConfiguredConnection();
     }
