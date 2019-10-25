@@ -241,4 +241,10 @@ class Data extends AbstractHelper
     public function cleanCacheConfig() {
         $this->typeList->cleanType('config');
     }
+
+
+    public function saveStoreConfig($path, $value)
+    {
+        $this->configWriter->save($path, $value);
+    }
 }

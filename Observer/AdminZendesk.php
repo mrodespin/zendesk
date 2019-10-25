@@ -91,6 +91,7 @@ class AdminZendesk implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
+        $this->validateConnectionErrors();
         // Defaults for "global" scope
         $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT;
         $scopeId = 0;
@@ -309,5 +310,14 @@ class AdminZendesk implements ObserverInterface
         $subdomain = $this->scopeConfig->getValue(self::PATH_SUBDOMAIN, $scope, $storeCode);
         $pattern = 'https://%1$s.zendesk.com%2$s';
         return sprintf($pattern, $subdomain, $uri);
+    }
+
+    private function validateConnectionErrors()
+    {
+        $erroId = $this->scopeConfig->getValue(\Wagento\Zendesk\Helper\Api\ErrorHandler\Connector::XML_PATH_ERROR);
+        $errors = \Wagento\Zendesk\Helper\Api\ErrorHandler\Connector::ERRO_MSG;
+        if(isset($errors[$erroId])) {
+            $this->messageManager->addErrorMessage($errors[$erroId]);
+        }
     }
 }

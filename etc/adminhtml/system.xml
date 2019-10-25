@@ -49,7 +49,7 @@
                 <field id="client_id" translate="label comment" type="text" sortOrder="10"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Client Id</label>
-                    <comment>API Unique Identifier</comment>
+                    <comment>API Unique Identifier also called Unique Identifier.</comment>
                 </field>
 
                 <!--obscure-->
@@ -75,6 +75,7 @@
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable Connection Heltcheck On Admin</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If enabled, this will validate connection credentials doing a test api call every time an admin page is viewed. So this may cause performance issues. Recommende value by dafult is No.</comment>
                 </field>
             </group>
 
