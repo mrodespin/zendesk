@@ -68,13 +68,17 @@ class Sync implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
+        // on registration this field is null since there is no previous data of the customer
+        $isNewCustomer = $observer->getData('orig_customer_data_object') === null;
+
         /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
         $customer = $observer->getData('customer'); // login
         if (!$customer) {
             $customer = $observer->getData('customer_data_object'); // register
         }
 
-        if (!($customer instanceof \Magento\Customer\Api\Data\CustomerInterface)) {
+        if (!($customer instanceof \Magento\Customer\Api\Data\CustomerInterface)
+            || !$isNewCustomer) {
             return;
         }
 
