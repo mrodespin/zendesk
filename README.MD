@@ -23,6 +23,10 @@ If you are facing any issue with module installation and configuration please se
 ## Changelog
 Based in `setup_version`
 
+v1.0.5
+- Added minnor fixes to module
+- Added notice for ending support to github repo, now only refer to https://marketplace.magento.com/wagento-zendesk.html
+
 v1.0.4
 - Added support for M2.3
 - Fixed template issue when enabling Open Ticket on recent order list
