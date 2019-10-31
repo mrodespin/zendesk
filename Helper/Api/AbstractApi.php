@@ -35,7 +35,7 @@ abstract class AbstractApi extends AbstractHelper
         \Wagento\Zendesk\Helper\Api\Sources\Client $client,
         \Wagento\Zendesk\Helper\Data $zendeskHelper
     ) {
-    
+
         parent::__construct($context);
         $this->zendeskHelper = $zendeskHelper;
         $this->client = $client;
@@ -56,6 +56,16 @@ abstract class AbstractApi extends AbstractHelper
             $endpoint .= '?' . implode('&', $args);
         }
         $uri = $this->zendeskHelper->buildUri($endpoint);
+        $this->client->send('GET', $uri);
+        return $this->client->getBody();
+    }
+
+    /**
+     * @param string $uri
+     */
+    protected function getPagination($uri)
+    {
+        $this->prepareAuth();
         $this->client->send('GET', $uri);
         return $this->client->getBody();
     }
