@@ -71,11 +71,13 @@ class Connector extends \Wagento\Zendesk\Helper\Api\AbstractApi
             $response = json_decode($jsonResponse, true);
             if (isset($response['access_token'])) {
                 $token = $response['access_token'];
+                $this->zendeskHelper->saveStoreConfig(\Wagento\Zendesk\Helper\Api\ErrorHandler\Connector::XML_PATH_ERROR, \Wagento\Zendesk\Helper\Api\ErrorHandler\Connector::NO_ERROR);
                 return true;
             }
         } catch (\Exception $exception) {
             $response['error'] = $exception->getMessage();
         }
+        $this->zendeskHelper->saveStoreConfig(\Wagento\Zendesk\Helper\Api\ErrorHandler\Connector::XML_PATH_ERROR, \Wagento\Zendesk\Helper\Api\ErrorHandler\Connector::WORNG_FIELDS_VALUES_ERROR);
         return false;
     }
 
@@ -89,7 +91,7 @@ class Connector extends \Wagento\Zendesk\Helper\Api\AbstractApi
      */
     public function validateConfig($config)
     {
-        if (isset($config['client_id']) && isset($config['subdomain']) && isset($config['client_secret'])) {
+        if (isset($config['client_id'], $config['subdomain'], $config['client_secret'])) {
             $scope = $config['scope'];
             $scopeId = $config['scopeId'];
 
@@ -100,6 +102,7 @@ class Connector extends \Wagento\Zendesk\Helper\Api\AbstractApi
             $this->zendeskHelper->cleanCacheConfig();
             return true;
         }
+        $this->zendeskHelper->saveStoreConfig(\Wagento\Zendesk\Helper\Api\ErrorHandler\Connector::XML_PATH_ERROR, \Wagento\Zendesk\Helper\Api\ErrorHandler\Connector::EMPTY_FIELDS_ERROR);
         return false;
     }
 

@@ -48,7 +48,27 @@ class Ticket extends AbstractApi
     {
         $response = $this->get(self::LIST_TICKETS);
         $data = json_decode($response, true);
-        return isset($data['tickets']) ? $data['tickets'] : [];
+        $url = $data['next_page'];
+        $tickets [] = $data['tickets'];
+
+        while ($url)
+        {
+                $response = $this->getPagination($url);
+                $dataPagination = json_decode($response, true);
+                $tickets[] = $dataPagination['tickets'];
+                $url = $dataPagination['next_page'];
+
+        }
+
+        foreach ($tickets as $value)
+        {
+            foreach ($value as $values )
+            {
+                $ticketsData[] = $values;
+            }
+        }
+
+        return isset($ticketsData) ? $ticketsData : [];
     }
 
     /**

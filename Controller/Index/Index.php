@@ -53,10 +53,13 @@ class Index extends AbstractOauth
         $resultRedirect = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
         if ($this->validateRequest($this->getRequest(), $params)) {
             if (isset($params['code'])) {
+                // STEP2: save Oauth Token if error occures: print
                 if ($this->connector->generateToken($params['code'], $token)) {
                     $this->connector->saveToken($token);
                 }
             } else {
+                // var_dump($params); die;
+                // STEP 1: Redirect to Oauth url
                 if ($this->connector->validateConfig($params)) {
                     $uri = $this->connector->getAuthUrl();
                     return $resultRedirect->setPath($uri);
