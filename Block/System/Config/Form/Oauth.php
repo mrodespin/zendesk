@@ -20,6 +20,12 @@ class Oauth extends \Magento\Config\Block\System\Config\Form\Field
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
     protected $scopeConfig;
+    /** @var Url */
+    protected $urlHelper;
+    /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
@@ -31,12 +37,16 @@ class Oauth extends \Magento\Config\Block\System\Config\Form\Field
         \Magento\Backend\Block\Template\Context $context,
         \Wagento\Zendesk\Helper\Data $zendeskHelper,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Framework\Url $urlHelper,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         array $data = []
     ) {
     
         parent::__construct($context, $data);
         $this->zendeskHelper = $zendeskHelper;
         $this->scopeConfig = $scopeConfig;
+        $this->urlHelper = $urlHelper;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -145,6 +155,7 @@ class Oauth extends \Magento\Config\Block\System\Config\Form\Field
      * @return mixed
      */
     public function getFrontBaseUrl() {
-        return $this->scopeConfig->getValue('web/secure/base_url');
+        $store = $this->storeManager->getDefaultStoreView();
+        return $this->urlHelper->getUrl(null, [ '_scope' => $store->getId()]);
     }
 }
